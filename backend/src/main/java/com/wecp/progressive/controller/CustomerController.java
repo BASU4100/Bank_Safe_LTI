@@ -3,30 +3,67 @@ package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Customers;
 import com.wecp.progressive.entity.Transactions;
+// import com.wecp.progressive.service.CustomerService;
+import com.wecp.progressive.service.impl.CustomerServiceImplArraylist;
+import com.wecp.progressive.service.impl.CustomerServiceImplJpa;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+// import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+@RequestMapping("/customers")
 public class CustomerController {
+    @Autowired
+    private CustomerServiceImplArraylist customerServiceArraylist;
 
-    public ResponseEntity<List<Customers>> getAllCustomers() {
-        return null;
+    @Autowired
+    private CustomerServiceImplJpa customerServiceImplJpa;
+
+    @GetMapping
+    public ResponseEntity<List<Customers>> getAllCustomers() throws SQLException {
+        return new ResponseEntity<>(customerServiceImplJpa.getAllCustomers(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Customers> getCustomerById(int customerId) {
-        return null;
+    @GetMapping("/{customerId}")
+    public Customers getCustomerById(@PathVariable int customerId) throws SQLException {
+        return customerServiceImplJpa.getCustomerById(customerId);
     }
 
-    public ResponseEntity<Integer> addCustomer(Customers customers) {
-        return null;
+    @GetMapping("/fromArrayList")
+    public List<Customers> getAllCustomersFromArrayList() throws SQLException {
+        return customerServiceArraylist.getAllCustomers();
     }
 
-    public ResponseEntity<Void> updateCustomer(int customerId, Customers customers) {
-        return null;
+    @GetMapping("/fromArrayList/all")
+    public List<Customers> getAllCustomersSortedByNameFromArrayList() throws SQLException {
+        return customerServiceArraylist.getAllCustomersSortedByName();
     }
-    public ResponseEntity<Void> deleteCustomer(int customerId) {
-        return null;
+
+    @PostMapping
+    public int addCustomer(Customers customers) throws SQLException {
+        return customerServiceImplJpa.addCustomer(customers);
+    }
+
+    @PostMapping("/toArrayList")
+    public ResponseEntity<Integer> addCustomerToArrayList(Customers customers) throws SQLException {
+        return new ResponseEntity<>(customerServiceArraylist.addCustomer(customers), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{customerId}")
+    public void updateCustomer(@PathVariable int customerId, Customers customers) throws SQLException {
+        customers.setCustomerId(customerId);
+        customerServiceImplJpa.updateCustomer(customers);
+    }
+
+    @DeleteMapping("/{customerId}")
+    public void deleteCustomer(int customerId) throws SQLException {
+        customerServiceImplJpa.deleteCustomer(customerId);
     }
 
     public ResponseEntity<List<Transactions>> getAllTransactionsByCustomerId(int customerId) {
