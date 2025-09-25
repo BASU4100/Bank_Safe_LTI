@@ -70,7 +70,8 @@ public class AccountDAOImpl implements AccountDAO {
 
         try (PreparedStatement ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, accounts.getAccountId());
-            ps.setInt(2, accounts.getCustomerId());
+            // ps.setInt(2, accounts.getCustomerId());
+            ps.setInt(2, accounts.getCustomers().getCustomerId());
             ps.setDouble(3, accounts.getBalance());
             if (ps.executeUpdate()>0) {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -86,7 +87,8 @@ public class AccountDAOImpl implements AccountDAO {
         String q = "update accounts set customer_id = ?, balance = ? where account_id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(q, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, accounts.getCustomerId());
+            // ps.setInt(1, accounts.getCustomerId());
+            ps.setInt(1, accounts.getCustomers().getCustomerId());
             ps.setDouble(2, accounts.getBalance());
             ps.setInt(3, accounts.getAccountId());
             ps.executeUpdate();

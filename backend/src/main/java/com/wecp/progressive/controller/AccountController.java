@@ -1,35 +1,56 @@
 package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Accounts;
+import com.wecp.progressive.service.impl.AccountServiceImplJpa;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/accounts")
 public class AccountController {
+    @Autowired
+    private final AccountServiceImplJpa accountServiceImplJpa;
 
-    public ResponseEntity<List<Accounts>> getAllAccounts() {
-        return null;
+    public AccountController(AccountServiceImplJpa accountServiceImplJpa) {
+        this.accountServiceImplJpa = accountServiceImplJpa;
     }
 
-    public ResponseEntity<Accounts> getAccountById(int accountId) {
-        return null;
+    @GetMapping
+    public ResponseEntity<List<Accounts>> getAllAccounts() throws SQLException {
+        return new ResponseEntity<>(accountServiceImplJpa.getAllAccounts(), HttpStatus.OK);
     }
 
-    public ResponseEntity<List<Accounts>> getAccountsByUser(String param) {
-        return null;
+    @GetMapping("/{accountId}")
+    public ResponseEntity<Accounts> getAccountById(@PathVariable int accountId) throws SQLException {
+        return new ResponseEntity<>(accountServiceImplJpa.getAccountById(accountId), HttpStatus.OK);
     }
 
-    public ResponseEntity<Integer> addAccount(Accounts accounts) {
-        return null;
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Accounts>> getAccountsByUser(@PathVariable int userId) throws SQLException {
+        return new ResponseEntity<>(accountServiceImplJpa.getAccountsByUser(userId), HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> updateAccount(int accountId, Accounts accounts) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Integer> addAccount(@RequestBody Accounts accounts) throws SQLException {
+        return new ResponseEntity<>(accountServiceImplJpa.addAccount(accounts), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> deleteAccount(int accountId) {
-        return null;
+    @PutMapping("/{accountId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAccount(@PathVariable int accountId, @RequestBody Accounts accounts) throws SQLException {
+        accounts.setAccountId(accountId);
+        accountServiceImplJpa.updateAccount(accounts);
+    }
+
+    @DeleteMapping("/{accountId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAccount(int accountId) throws SQLException {
+        accountServiceImplJpa.deleteAccount(accountId);
     }
 }

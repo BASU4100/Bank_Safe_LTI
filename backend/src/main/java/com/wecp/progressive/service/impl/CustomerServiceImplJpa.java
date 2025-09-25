@@ -5,14 +5,19 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wecp.progressive.entity.Customers;
+// import com.wecp.progressive.repository.AccountRepository;
 import com.wecp.progressive.repository.CustomerRepository;
 import com.wecp.progressive.service.CustomerService;
 
 @Service
 public class CustomerServiceImplJpa implements CustomerService {
+    // @Autowired
+    // private AccountRepository accountRepository;
+
     private final CustomerRepository customerRepository;
 
     public CustomerServiceImplJpa(CustomerRepository customerRepository) {

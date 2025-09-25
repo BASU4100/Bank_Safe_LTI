@@ -54,8 +54,8 @@ public class TransactionServiceImplJpa implements TransactionService {
 
     @Override
     public List<Transactions> getTransactionsByCustomerId(int customerId) throws SQLException {
-        List<Accounts> accList = accountRepository.getAccountsByUser(customerId);
-        List<Transactions> transactionList = accList.stream().map(acc -> transactionRepository.findByAccountId(acc.getAccountId())).collect(Collectors.toList());
+        List<Accounts> accList = accountRepository.getAccountsByCustomerCustomerId(customerId);
+        List<Transactions> transactionList = accList.stream().map(acc -> transactionRepository.findByAccountAccountId(acc.getAccountId())).collect(Collectors.toList());
         return transactionList;
     }
 

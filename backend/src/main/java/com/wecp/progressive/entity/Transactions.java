@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Transactions {
@@ -13,20 +15,30 @@ public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer transactionId;
-    private int accountId;
+    // private int accountId;
     private double amount;
     private String transactionType;
     private Date transactionDate;
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Accounts account;
     
     public Transactions() {
     }
 
     public Transactions(int transactionId, int accountId, double amount, Date transactionDate, String transactionType) {
         this.transactionId = transactionId;
-        this.accountId = accountId;
+        this.account.setAccountId(accountId);
         this.amount = amount;
         this.transactionType = transactionType;
         this.transactionDate = transactionDate;
+    }
+
+    public Transactions(double amount, String transactionType, Date transactionDate, Accounts accounts) {
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.transactionDate = transactionDate;
+        this.account = accounts;
     }
 
     public int getTransactionId() {
@@ -37,12 +49,12 @@ public class Transactions {
         this.transactionId = transactionId;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
+    // public int getAccountId() {
+    //     return accountId;
+    // }
 
     public void setAccountId(int accountId) {
-        this.accountId = accountId;
+        this.account.setAccountId(accountId);
     }
 
     public double getAmount() {
@@ -68,4 +80,12 @@ public class Transactions {
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     } 
+
+    public Accounts getAccount() {
+        return account;
+    }
+
+    public void setAccount(Accounts accounts) {
+        this.account = accounts;
+    }
 }

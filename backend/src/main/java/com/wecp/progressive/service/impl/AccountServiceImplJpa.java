@@ -3,6 +3,7 @@ package com.wecp.progressive.service.impl;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,14 @@ public class AccountServiceImplJpa implements AccountService {
     }
 
     @Override
-    public List<Accounts> getAccountsByUser(int userId) throws SQLException {
-        return accountRepository.getAccountsByUser(userId);
+    public List<Accounts> getAccountsByUser(int customerId) throws SQLException {
+        return accountRepository.getAccountsByCustomerCustomerId(customerId);
     }
 
     @Override
     public Accounts getAccountById(int accountId) throws SQLException {
-        return accountRepository.findById(accountId).get();
+        Optional<Accounts> account = accountRepository.findById(accountId);
+        return ((account.isEmpty())?null:account.get());
     }
 
     @Override

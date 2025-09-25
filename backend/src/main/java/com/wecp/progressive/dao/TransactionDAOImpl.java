@@ -30,7 +30,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
         try(PreparedStatement ps = conn.prepareStatement(q, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, transaction.getTransactionId());
-            ps.setInt(2, transaction.getAccountId());
+            ps.setInt(2, transaction.getAccount().getAccountId());
             ps.setDouble(3, transaction.getAmount());
             ps.setDate(4, new java.sql.Date((transaction.getTransactionDate()).getTime()));
             ps.setString(5, transaction.getTransactionType());
@@ -62,7 +62,7 @@ public class TransactionDAOImpl implements TransactionDAO {
         String q = "update transactions set account_id = ?, amount = ?, transaction_date = ?, transaction_type = ? where transaction_id = ?";
 
         try(PreparedStatement ps = conn.prepareStatement(q)) {
-            ps.setInt(1, transaction.getAccountId());
+            ps.setInt(1, transaction.getAccount().getAccountId());
             ps.setDouble(2, transaction.getAmount());
             ps.setDate(3, new java.sql.Date((transaction.getTransactionDate()).getTime()));
             ps.setString(4, transaction.getTransactionType());

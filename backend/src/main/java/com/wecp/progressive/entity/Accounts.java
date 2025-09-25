@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Accounts implements Comparable<Accounts> {
@@ -11,19 +13,27 @@ public class Accounts implements Comparable<Accounts> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer accountId;
-    private int customerId;
+    // private int customerId;
     private double balance;
+    @ManyToOne
+    @JoinColumn(name="customerId")
+    private Customers customer;
     
     public Accounts() {
     }
-
+    
     public Accounts(int accountId, int customerId, double balance) {
         this.accountId = accountId;
-        this.customerId = customerId;
+        this.customer.setCustomerId(customerId);
         this.balance = balance;
     }
-
-    public int getAccountId() {
+    
+    // public Accounts(double balance, Customers customers) {
+    //     this.balance = balance;
+    //     this.customers = customers;
+    // }
+    
+    public Integer getAccountId() {
         return accountId;
     }
 
@@ -31,12 +41,12 @@ public class Accounts implements Comparable<Accounts> {
         this.accountId = accountId;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
+    // public int getCustomerId() {
+    //     return customerId;
+    // }
 
     public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+        this.customer.setCustomerId(customerId);
     }
 
     public double getBalance() {
@@ -45,6 +55,14 @@ public class Accounts implements Comparable<Accounts> {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    
+    public Customers getCustomers() {
+        return customer;
+    }
+    
+    public void setCustomers(Customers customers) {
+        this.customer = customers;
     }
 
     @Override

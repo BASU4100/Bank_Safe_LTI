@@ -8,5 +8,5 @@ import com.wecp.progressive.entity.Transactions;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transactions, Integer> {
 
-    Transactions findByAccountId(int accountId);
+    Transactions findByAccountAccountId(int accountId);
 }
