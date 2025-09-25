@@ -46,8 +46,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public int addCustomer(Customers customers) throws SQLException {
-        return customerServiceImplJpa.addCustomer(customers);
+    public ResponseEntity<Integer> addCustomer(@RequestBody Customers customers) throws SQLException {
+        return new ResponseEntity<>(customerServiceImplJpa.addCustomer(customers), HttpStatus.CREATED);
     }
 
     @PostMapping("/toArrayList")
@@ -56,7 +56,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}")
-    public void updateCustomer(@PathVariable int customerId, Customers customers) throws SQLException {
+    public void updateCustomer(@PathVariable int customerId, @RequestBody Customers customers) throws SQLException {
         customers.setCustomerId(customerId);
         customerServiceImplJpa.updateCustomer(customers);
     }
