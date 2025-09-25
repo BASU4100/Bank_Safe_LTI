@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wecp.progressive.entity.Accounts;
 import com.wecp.progressive.repository.AccountRepository;
+import com.wecp.progressive.repository.TransactionRepository;
 import com.wecp.progressive.service.AccountService;
 
 @Service
@@ -17,6 +19,8 @@ public class AccountServiceImplJpa implements AccountService {
 
     // @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     public AccountServiceImplJpa(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -54,6 +58,7 @@ public class AccountServiceImplJpa implements AccountService {
     @Override
     public void deleteAccount(int accountId) throws SQLException {
         accountRepository.deleteById(accountId);
+        transactionRepository.deleteByAccountAccountId(accountId);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class Transactions {
         this.account = accounts;
     }
 
-    public int getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
 
