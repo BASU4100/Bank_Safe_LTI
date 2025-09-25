@@ -2,6 +2,7 @@ package com.wecp.progressive.service.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 // import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,25 @@ public class TransactionServiceImplJpa implements TransactionService {
 
     @Override
     public Transactions getTransactionById(int transactionId) throws SQLException {
-        return transactionRepository.findById(transactionId).get();
+        Optional<Transactions> transaction = transactionRepository.findById(transactionId);
+        return ((transaction.isEmpty())?null:transaction.get());
     }
 
     @Override
     public int addTransaction(Transactions transaction) throws SQLException {
+        // update Accounts Logic
+        // double balance = accountRepository.findByAccountId(transaction.getAccount().getAccountId()).getBalance();
+        // if (transaction.getTransactionType().equalsIgnoreCase("DEPOSIT")) {
+        //     transaction.getAccount().setBalance(balance + transaction.getAmount());
+        // }
+        // else {
+        //     if(balance < transaction.getAmount()) {
+        //         return -1;
+        //     }
+        //     else {
+        //         transaction.getAccount().setBalance(balance - transaction.getAmount());
+        //     }
+        // }
         return transactionRepository.save(transaction).getTransactionId();
     }
 
