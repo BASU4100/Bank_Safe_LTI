@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// @RestController
 public class CreditCardController {
 
     public ResponseEntity<List<CreditCard>> getAllCreditCards() {
