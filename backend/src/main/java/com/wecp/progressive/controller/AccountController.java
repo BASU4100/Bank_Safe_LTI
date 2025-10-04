@@ -29,12 +29,12 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<?> getAccountById(@PathVariable int accountId) throws SQLException {
+    public ResponseEntity<?> getAccountById(@PathVariable Integer accountId) throws SQLException {
         return new ResponseEntity<>(accountServiceImplJpa.getAccountById(accountId), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Accounts>> getAccountsByUser(@PathVariable int userId) throws SQLException {
+    public ResponseEntity<List<Accounts>> getAccountsByUser(@PathVariable Integer userId) throws SQLException {
         return new ResponseEntity<>(accountServiceImplJpa.getAccountsByUser(userId), HttpStatus.OK);
     }
 
@@ -45,14 +45,14 @@ public class AccountController {
 
     @PutMapping("/{accountId}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateAccount(@PathVariable int accountId, @RequestBody Accounts accounts) throws SQLException {
+    public void updateAccount(@PathVariable Integer accountId, @RequestBody Accounts accounts) throws SQLException {
         accounts.setAccountId(accountId);
         accountServiceImplJpa.updateAccount(accounts);
     }
 
     @DeleteMapping("/{accountId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteAccount(int accountId) throws SQLException {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAccount(@PathVariable int accountId) throws SQLException {
         accountServiceImplJpa.deleteAccount(accountId);
         transactionRepository.deleteByAccountsAccountId(accountId);
     }

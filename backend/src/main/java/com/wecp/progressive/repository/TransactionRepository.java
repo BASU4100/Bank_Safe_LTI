@@ -12,12 +12,12 @@ import com.wecp.progressive.entity.Transactions;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transactions, Integer> {
 
-    Transactions findByAccountsAccountId(int accountId);
+    Transactions findByAccountsAccountId(Integer accountId);
 
-    void deleteByAccountsAccountId(int accountId);
+    void deleteByAccountsAccountId(Integer accountId);
 
     @Modifying
     @Transactional
-    @Query("delete from Transactions t where t.accounts.customer.customerId = :customerId")
-    void deleteByCustomerId(int customerId);
+    @Query("delete from Transactions t where t.accounts in (Select a from Accounts a where a.customer.customerId = :customerId)")
+    void deleteByCustomerId(Integer customerId);
 }

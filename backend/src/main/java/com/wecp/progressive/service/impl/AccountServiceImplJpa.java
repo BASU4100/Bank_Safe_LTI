@@ -56,6 +56,9 @@ public class AccountServiceImplJpa implements AccountService {
 
     @Override
     public void deleteAccount(int accountId) throws SQLException {
+        if (!accountRepository.existsById(accountId)) {
+            throw new AccountNotFoundException("No account exists with id: "+accountId);
+        }
         transactionRepository.deleteByAccountsAccountId(accountId);
         accountRepository.deleteById(accountId);
     }

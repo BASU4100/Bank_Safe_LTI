@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wecp.progressive.entity.Customers;
+import com.wecp.progressive.exception.AccountNotFoundException;
 import com.wecp.progressive.exception.CustomerAlreadyExistsException;
 import com.wecp.progressive.repository.AccountRepository;
 import com.wecp.progressive.repository.CustomerRepository;
@@ -34,6 +35,9 @@ public class CustomerServiceImplJpa implements CustomerService {
 
     @Override
     public int addCustomer(Customers customers) throws SQLException {
+        if (customers.getRole()==null) {
+            throw new CustomerAlreadyExistsException("Role cannot be NULL");
+        }
         if (customerRepository.findByEmail(customers.getEmail())==null) {
             return customerRepository.save(customers).getCustomerId();
         }
@@ -49,6 +53,9 @@ public class CustomerServiceImplJpa implements CustomerService {
 
     @Override
     public void updateCustomer(Customers customers) throws SQLException {
+        if (customers.getRole().isEmpty() || customers.getRole()==null) {
+            throw new CustomerAlreadyExistsException("Role cannot be empty");
+        }
         Customers fetchedCustomers = customerRepository.findByEmail(customers.getEmail());
         if (fetchedCustomers!=null && fetchedCustomers.getCustomerId()!=customers.getCustomerId()) {
             throw new CustomerAlreadyExistsException("This customers email is already associated with some other customer");

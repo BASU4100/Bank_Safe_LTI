@@ -65,7 +65,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(int customerId) throws SQLException {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable int customerId) throws SQLException {
         customerServiceImplJpa.deleteCustomer(customerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -58,7 +58,7 @@ public class TransactionController {
     @DeleteMapping("/{transactionId}")
     public ResponseEntity<Void> deleteTransaction(@PathVariable int transactionId) throws SQLException {
         transactionServiceImplJpa.deleteTransaction(transactionId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/user/{customerId}")
