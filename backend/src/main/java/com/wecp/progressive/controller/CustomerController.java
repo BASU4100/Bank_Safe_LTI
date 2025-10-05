@@ -2,7 +2,7 @@ package com.wecp.progressive.controller;
 
 
 import com.wecp.progressive.entity.Customers;
-import com.wecp.progressive.entity.Transactions;
+// import com.wecp.progressive.entity.Transactions;
 // import com.wecp.progressive.service.CustomerService;
 import com.wecp.progressive.service.impl.CustomerServiceImplArraylist;
 import com.wecp.progressive.service.impl.CustomerServiceImplJpa;
@@ -70,7 +70,7 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    public ResponseEntity<List<Transactions>> getAllTransactionsByCustomerId(int customerId) {
-        return null;
-    }
+    // public ResponseEntity<List<Transactions>> getAllTransactionsByCustomerId(int customerId) {
+    //     return null;
+    // }
 }
