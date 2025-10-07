@@ -1,0 +1,19 @@
+//Register user
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+{
+    "name": "Basu",
+    "email": "example@example.com",
+    "username": "BASU4100",
+    "password": "pass123",
+    "role": "USER"
+}
+
+# {
+#     "name": "Vivek",
+#     "email": "example@example.com",
+#     "username": "VIVEK4100",
+#     "password": "pass123456",
+#     "role": "ADMIN"
+# }

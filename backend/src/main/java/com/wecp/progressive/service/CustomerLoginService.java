@@ -40,7 +40,7 @@ public class CustomerLoginService implements UserDetailsService {
     }
 
     public Customers createCustomer(Customers customer) {
-        if (getCustomerByName(customer.getName())==null) {
+        if (getCustomerByName(customer.getUsername())!=null) {
             throw new CustomerAlreadyExistsException("Username not available");
         }
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
