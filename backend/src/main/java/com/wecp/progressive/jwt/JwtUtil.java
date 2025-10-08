@@ -20,7 +20,7 @@ public class JwtUtil {
     @Autowired
     private CustomerRepository customerRepository;
 
-    private final String secret = "HelloWorld_is_not_same_in_all_languages_it_is_different_in_programming.";
+    private final String secret = "HelloWorld+is+not+same+in+all+languages+it+is+different+in+programming.";
     private final int expiration = 86400;
 
     public String generateToken(String username) {

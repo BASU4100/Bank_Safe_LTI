@@ -2,13 +2,13 @@
 POST http://localhost:5000/user/register
 Content-Type: application/json
 
-{
-    "name": "Basu",
-    "email": "example@example.com",
-    "username": "BASU4100",
-    "password": "pass123",
-    "role": "USER"
-}
+# {
+#     "name": "Basu",
+#     "email": "example@example.com",
+#     "username": "BASU4100",
+#     "password": "pass123",
+#     "role": "USER"
+# }
 
 # {
 #     "name": "Vivek",
@@ -17,3 +17,11 @@ Content-Type: application/json
 #     "password": "pass123456",
 #     "role": "ADMIN"
 # }
+
+{
+    "name": "Vivek Basu",
+    "email": "example1@example.com",
+    "username": "VIVEK4100",
+    "password": "pass12356",
+    "role": "ADMIN"
+}
