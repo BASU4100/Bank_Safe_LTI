@@ -1,0 +1,14 @@
+//Get All Transactions
+GET http://localhost:5000/transactions
+//Get Transaction By Transaction Id
+GET http://localhost:5000/transactions/4
+//Add Transaction
+POST http://localhost:5000/transactions
+//Update Transaction
+PUT http://localhost:5000/transactions/4
+//Delete Transaction
+DELETE http://localhost:5000/transactions/4
+//Get All Transaction By Customer Id
+GET http://localhost:5000/transactions/user/1
+
+Content-Type: application/json

@@ -1,7 +1,12 @@
 //Register user
 POST http://localhost:5000/user/register
+//Login user
+POST http://localhost:5000/user/login
+
 Content-Type: application/json
 
+
+//Registeration Json
 # {
 #     "name": "Basu",
 #     "email": "example@example.com",
@@ -18,10 +23,24 @@ Content-Type: application/json
 #     "role": "ADMIN"
 # }
 
-{
-    "name": "Vivek Basu",
-    "email": "example1@example.com",
-    "username": "VIVEK4100",
-    "password": "pass12356",
-    "role": "ADMIN"
-}
+#Duplicate to get Error
+# {
+#     "name": "Vivek Basu",
+#     "email": "example1@example.com",
+#     "username": "VIVEK4100",
+#     "password": "pass12356",
+#     "role": "ADMIN"
+# }
+
+// Login Json
+//User
+# {
+#     "username": "BASU4100",
+#     "password": "pass123"
+# }
+
+//Admin
+# {
+#     "username": "VIVEK4100",
+#     "password": "pass123456"
+# }
