@@ -1,0 +1,24 @@
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" novalidate>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" formControlName="name">
+    <div *ngIf="customerForm.get('name').touched">
+        <small *ngIf="customerForm.get('name').invalid">Name is required.</small>
+    </div>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" formControlName="email">
+    <div *ngIf="customerForm.get('email').touched">
+        <small *ngIf="customerForm.get('email').invalid">Email is required.</small>
+    </div>
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" formControlName="username">
+    <div *ngIf="customerForm.get('username').touched">
+        <small *ngIf="customerForm.get('username').invalid">Username is required.</small>
+    </div>
+    <label for="password">Name:</label>
+    <input type="password" name="password" id="password" formControlName="password">
+    <div *ngIf="customerForm.get('password').touched">
+        <small *ngIf="customerForm.get('password').invalid">Password is required.</small>
+    </div>
+    <button type="submit" [disabled]="customerForm.valid">Submit</button>
+</form>
+<p *ngIf="isFormSubmitted">{{customerSuccess$ ? customerSuccess$: customerError$}}</p>
