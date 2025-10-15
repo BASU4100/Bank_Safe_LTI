@@ -1,26 +1,26 @@
 <form [formGroup]="accountForm">
-    <div>
+    <!-- <div>
         <label for="accountId">Account ID:</label>
         <input type="text" id="accountId" name="accountId" formControlName="accountId">
         <div *ngIf="accountForm.get('accountId').touched"></div>
             <small *ngIf="accountForm.get('accountId').invalid">Account ID must be greater than 0.</small>
         </div>
-    </div>
+    </div> -->
     
     <div>
         <label for="customer_id">Customer ID:</label>
         <input type="text" name="customer_id" id="customer_id" formControlName="customer_id">
-        <div *ngIf="accountForm.get('customerId').touched">
+        <!-- <div *ngIf="accountForm.get('customerId').touched">
             <small *ngIf="accountForm.get('customerId').invalid">CustomerId is required.</small>
-        </div>
+        </div> -->
     </div>
     
     <label for="balance">Balance:</label>
     <input type="number" name="balance" id="balance" formControlName="balance">
-    <div *ngIf="accountForm.get('balance').touched">
+    <!-- <div *ngIf="accountForm.get('balance').touched">
         <small *ngIf="accountForm.get('balance').invalid">Balance cannot be negative.</small>
-    </div>
+    </div> -->
 
-    <button type="submit" [disabled]="accountForm.invalid">Submit</button>
-    <!-- <button type="submit">Submit</button> -->
+    <!-- <button type="submit" [disabled]="accountForm.invalid">Submit</button> -->
+    <button type="submit">Submit</button>
 </form>

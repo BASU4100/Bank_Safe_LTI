@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
         this.accountForm = this.fb.group({
             account_id: ['', [Validators.required]],
             customer_id: ['', [Validators.required]],
-            balance: [0, [Validators.required, Validators.min(0)]]
+            balance: ['', [Validators.required, Validators.min(0)]]
         });
         this.account = new AccountTS("1", 1000.00, "1");
     }
