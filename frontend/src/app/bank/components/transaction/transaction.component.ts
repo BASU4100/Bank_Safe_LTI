@@ -20,15 +20,17 @@ export class TransactionComponent implements OnInit{
     
     ngOnInit(): void {
         this.transactionForm = this.fb.group({
-            accountId: ['', [Validators.required]],
-            transactionType: ['', [Validators.required]],
-            amount: [0, [Validators.required, Validators.min(0)]],
-            transactionDate: ['', [Validators.required]],
-            transactionId: [0, [Validators.required]]
+            accountId: [null, Validators.required],
+            transactionType: [null, Validators.required],
+            amount: [null, [Validators.required, Validators.min(0)]],
+            transactionDate: [null, [Validators.required]],
+            transactionId: [null],
         });
     }
 
     onSubmit() {
-        this.transaction = new TransactionTS(this.transactionForm.get('accountId')?.value, this.transactionForm.get('amount')?.value, this.transactionForm.get('transactionDate')?.value, this.transactionForm.get('transactionId')?.value);
+        if (this.transactionForm.valid) {
+            this.transaction = new TransactionTS(this.transactionForm.get('accountId')?.value, this.transactionForm.get('amount')?.value, this.transactionForm.get('transactionDate')?.value, this.transactionForm.get('transactionType')?.value);
+        }
     }
 }

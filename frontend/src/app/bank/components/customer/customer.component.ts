@@ -10,10 +10,10 @@ import { FormsModule } from "@angular/forms";
 })
 export class CustomersComponent implements OnInit {
     isFormSubmitted: boolean | undefined;
-    customerSuccess$: any;
-    customerError$: any;
+    customerSuccess: string = '';
+    customerError: string = '';
     customerForm!: FormGroup;
-    customer: CustomerTS;
+    customers: CustomerTS[];
 
     constructor(private formBuilder: FormBuilder) {}
     
@@ -26,14 +26,18 @@ export class CustomersComponent implements OnInit {
         })
     }
 
+    private noSpecialCharacters(control: any): {[key: string]: boolean} | null {
+        return null;
+    }
+
     onSubmit(): void {
         if (this.customerForm.valid) {
-            this.customerSuccess$ = 'customer submitted successfully.';
+            this.customerSuccess = 'customer submitted successfully.';
             this.isFormSubmitted = true;
-            this.customer = new CustomerTS(this.customerForm.get('name')?.value, this.customerForm.get('email')?.value, this.customerForm.get('username')?.value, this.customerForm.get('password')?.value, '');
+            this.customers.push(new CustomerTS(this.customerForm.get('name')?.value, this.customerForm.get('email')?.value, this.customerForm.get('username')?.value, this.customerForm.get('password')?.value, ''));
         }
         else {
-            this.customerError$ = 'All fields are required.'
+            this.customerError = 'All fields are required.'
         }
     }
 

@@ -21,4 +21,6 @@
     </div>
     <button type="submit" [disabled]="customerForm.valid">Submit</button>
 </form>
-<p *ngIf="isFormSubmitted">{{customerSuccess$ ? customerSuccess$: customerError$}}</p>
+<p *ngIf="isFormSubmitted">{{!!customerSuccess ? customerSuccess: customerError}}</p>
+
+<a [routerLink]="['/bank']" >Dashboard</a>
