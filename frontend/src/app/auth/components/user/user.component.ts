@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
+
 
 @Component({
     selector: "app-user",
@@ -14,25 +17,25 @@ export class UserComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
         this.userForm = this.formBuilder.group({
             username: ["", [Validators.required, this.noSpecialCharacters]],
             password: ["", [Validators.required, Validators.minLength(8)]],
-            role: ["", [Validators.required]],
             name: ["", [Validators.required]],
             email: ["", [Validators.required, Validators.email]],
+            role: ["", [Validators.required]],
         });
     }
 
-    private noSpecialCharacters(control: any): { [key: string]: boolean } | null {
-        const SPECIAL_CHARACTERS_REGEX = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
-        if (SPECIAL_CHARACTERS_REGEX.test(control.value)) {
+    private noSpecialCharacters(control: any): {[key: string]: boolean} | null {
+        if (control.value && /[\W_]/.test(control.value)) {
             return { specialCharacters: true };
-        }
-        return null;
+          }
+          return null;
     }
 
     onSubmit(): void {
@@ -42,6 +45,7 @@ export class UserComponent implements OnInit {
                     this.successMessage = "User created successfully";
                     this.userForm.reset();
                     this.errorMessage = "";
+                    this.router.navigate(['/auth/login']);
                 },
                 error: (error) => {
                     console.log(error);

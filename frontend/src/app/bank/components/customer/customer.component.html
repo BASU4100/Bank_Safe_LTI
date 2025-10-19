@@ -1,26 +1,41 @@
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" novalidate>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" formControlName="name">
-    <div *ngIf="customerForm.get('name').touched">
-        <small *ngIf="customerForm.get('name').invalid">Name is required.</small>
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="container card bg-light" novalidate>
+    <h2 class="text-center mb-3">Create Customer</h2>
+    <div class="mb-3">
+        <label for="name" class="form-label"><b>Name:</b></label>
+        <input type="text" name="name" id="name" formControlName="name" class="form-control">
+        <div *ngIf="customerForm.get('name')?.touched">
+            <small *ngIf="customerForm.get('name')?.invalid">Name is required.</small>
+        </div>
     </div>
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" formControlName="email">
-    <div *ngIf="customerForm.get('email').touched">
-        <small *ngIf="customerForm.get('email').invalid">Email is required.</small>
+    <div class="mb-3">
+        <label for="email" class="form-label"><b>Email:</b></label>
+        <input type="email" name="email" id="email" formControlName="email" class="form-control">
+        <div *ngIf="customerForm.get('email')?.touched">
+            <small *ngIf="customerForm.get('email')?.invalid">Email is required.</small>
+        </div>
     </div>
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" formControlName="username">
-    <div *ngIf="customerForm.get('username').touched">
-        <small *ngIf="customerForm.get('username').invalid">Username is required.</small>
+    <div class="mb-3">
+        <label for="username" class="form-label"><b>Username:</b></label>
+        <input type="text" name="username" id="username" formControlName="username" class="form-control">
+        <div *ngIf="customerForm.get('username')?.touched">
+            <small *ngIf="customerForm.get('username')?.invalid">Username is required.</small>
+        </div>
     </div>
-    <label for="password">Name:</label>
-    <input type="password" name="password" id="password" formControlName="password">
-    <div *ngIf="customerForm.get('password').touched">
-        <small *ngIf="customerForm.get('password').invalid">Password is required.</small>
+    <div class="mb-3">
+        <label for="password" class="form-label"><b>Password:</b></label>
+        <input type="password" name="password" id="password" formControlName="password" class="form-control">
+        <div *ngIf="customerForm.get('password')?.touched">
+            <small *ngIf="customerForm.get('password')?.invalid">Password is required.</small>
+        </div>
     </div>
-    <button type="submit" [disabled]="customerForm.valid">Submit</button>
+    <div class="mb-3">
+        <label for="role" class="form-label"><b>Role:</b></label>
+        <select name="role" id="role" class="form-select">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+    </div>
+    <button type="submit" [disabled]="customerForm.valid" class="btn btn-primary mb-3">Create Customer</button>
+    <a [routerLink]="['/bank']" class="nav-link mb-3 text-center text-primary"><b>Dashboard</b></a>
 </form>
 <p *ngIf="isFormSubmitted">{{!!customerSuccess ? customerSuccess: customerError}}</p>
-
-<a [routerLink]="['/bank']" >Dashboard</a>

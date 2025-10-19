@@ -33,25 +33,48 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
+    // @Override
+    // protected void configure(HttpSecurity http) throws Exception {
+    //     http.csrf().disable()
+    //             .authorizeRequests()
+    //             .antMatchers("/customer/register", "/customer/login").permitAll()
+    //             .antMatchers(HttpMethod.GET,"/accounts/user/{userId}").hasAuthority("USER")
+    //             .antMatchers(HttpMethod.POST, "/transactions").hasAuthority("USER")
+    //             .antMatchers(HttpMethod.PUT,"/customers/{customerId}").hasAnyAuthority("USER","ADMIN")
+    //             .antMatchers(HttpMethod.GET,"/transactions/user/{customerId}").hasAnyAuthority("USER","ADMIN")
+    //             .antMatchers(HttpMethod.POST, "/customers").hasAuthority("ADMIN")
+    //             .antMatchers(HttpMethod.PUT, "/accounts/{accountId}").hasAuthority("ADMIN")
+    //             .antMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasAuthority("ADMIN")
+    //             .antMatchers(HttpMethod.DELETE, "/customers/{customerId}").hasAuthority("ADMIN")
+    //             .anyRequest().authenticated()
+    //             .and().formLogin()
+    //             .and()
+    //             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    //             http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    // }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/user/register", "/user/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/accounts/user/{userId}").hasAuthority("USER")
-                .antMatchers(HttpMethod.POST, "/transactions").hasAuthority("USER")
-                .antMatchers(HttpMethod.PUT,"/customers/{customerId}").hasAnyAuthority("USER","ADMIN")
-                .antMatchers(HttpMethod.GET,"/transactions/user/{customerId}").hasAnyAuthority("USER","ADMIN")
-                .antMatchers(HttpMethod.POST, "/customers").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/accounts/{accountId}").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/accounts/{accountId}").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/customers/{customerId}").hasAuthority("ADMIN")
+                .antMatchers("/customer/register", "/customer/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/customers/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/customers/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/customers/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/customers/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/accounts/**").hasAnyAuthority("USER", "ADMIN") // Repeat for accounts
+                .antMatchers(HttpMethod.POST, "/accounts/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/accounts/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/accounts/**").hasAuthority("ADMIN")
+                .antMatchers("/credit-cards/**").hasAnyAuthority( "ADMIN")
+                .antMatchers("/loans/**").hasAnyAuthority( "ADMIN")
+                .antMatchers("/transactions/**").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-                http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

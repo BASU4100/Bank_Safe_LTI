@@ -1,19 +1,19 @@
 //Register user
-POST http://localhost:5000/user/register
+POST http://localhost:5000/customer/register
 //Login user
-POST http://localhost:5000/user/login
+# POST http://localhost:5000/customer/login
 
 Content-Type: application/json
 
 
 //Registeration Json
-# {
-#     "name": "Basu",
-#     "email": "example@example.com",
-#     "username": "BASU4100",
-#     "password": "pass123",
-#     "role": "USER"
-# }
+{
+    "name": "Basu",
+    "email": "example@example.com",
+    "username": "BASU4100",
+    "password": "pass123",
+    "role": "USER"
+}
 
 # {
 #     "name": "Vivek",

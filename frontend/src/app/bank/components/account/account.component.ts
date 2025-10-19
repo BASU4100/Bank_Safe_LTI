@@ -3,6 +3,7 @@ import { Account } from '../../types/Account';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BankService } from '../../services/bank.service';
 import { Customer } from '../../types/Customer';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-accounts',

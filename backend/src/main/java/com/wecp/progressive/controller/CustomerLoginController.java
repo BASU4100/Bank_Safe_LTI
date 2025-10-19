@@ -31,12 +31,12 @@ public class CustomerLoginController {
             this.jwtUtil = jwtUtil;
     }
     
-    @PostMapping("user/register")
+    @PostMapping("customer/register")
     public ResponseEntity<Customers> registerUser(@RequestBody Customers user) {
         return new ResponseEntity<>(customerLoginService.createCustomer(user), HttpStatus.CREATED);
     }
     
-    @PostMapping("user/login")
+    @PostMapping("customer/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

@@ -4,7 +4,7 @@ export class Transaction {
     amount: number;
     transactionDate?: Date;
     transactionType: string;
-    accounts?: Account;
+    accounts: Account;
     constructor(data: any)
     {
         this.amount=data.amount;

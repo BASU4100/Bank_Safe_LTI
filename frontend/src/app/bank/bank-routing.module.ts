@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: "transaction", component: TransactionComponent },
   { path: "customer/edit", component: EditCustomerComponent },
   { path: "account/edit", component: EditAccountComponent },
- 
 ];
 
 @NgModule({

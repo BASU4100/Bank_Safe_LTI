@@ -83,7 +83,6 @@ export class BankService {
     return this.http.get<Transaction[]>(
       `${this.baseUrl}/transactions`
     );
-
   }
 
   getAllTransactionsByCustomerId(customerId: string): Observable<any> {

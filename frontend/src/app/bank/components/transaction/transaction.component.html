@@ -1,44 +1,38 @@
-<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
-    <!-- <div>
-        <label for="transactionId">Transaction ID:</label>
-        <input type="transactionId" formControlName="transactionId">
-    </div> -->
-    
-    <div>
-        <label for="accounts">Accounts:</label>
-        <input type="text" name="accounts" id="accounts" formControlName="accounts">
-        <div *ngIf="transactionForm.get('accounts')?.touched">
-            <small *ngIf="transactionForm.get('accounts')?.invalid">Accounts is required.</small>
+<div class="container">
+    <h1 class="text-center mb-3">Perform a Transaction</h1>
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3">
+        <div class="mb-3">
+            <label for="accounts" class="form-label"><b>Account:</b></label>
+            <select name="accounts" id="accounts" class="form-control">
+                <option value="{{account.accountId}}" *ngFor="let account of accounts">{{account.accountId}}</option>
+            </select>
+            <div *ngIf="transactionForm.get('accounts')?.touched">
+                <small *ngIf="transactionForm.get('accounts')?.invalid" class="text-danger">Accounts is required.</small>
+            </div>
         </div>
-    </div>
-    
-    <div>
-        <label for="amount">Transaction Amount:</label>
-        <input type="text" name="amount" id="amount" formControlName="amount">
-        <!-- <div *ngIf="transactionForm.get('amount').touched">
-            <small *ngIf="transactionForm.get('amount').invalid">Amount can not be less than 0.</small>
-        </div> -->
-    </div>
-
-    <!-- <div>
-        <label for="transactionDate">Transaction Date:</label>
-        <input type="date" name="transactionDate" id="transactionDate" formControlName="transactionDate">
-        <div *ngIf="transactionForm.get('transactionDate').touched">
-            <small *ngIf="transactionForm.get('transactionDate').invalid">Transaction Dateis required.</small>
+        
+        <div class="mb-3">
+            <label for="amount" class="form-label"><b>Amount:</b></label>
+            <input type="number" name="amount" id="amount" formControlName="amount" class="form-control">
+            <div *ngIf="transactionForm.get('amount')?.touched">
+                <small *ngIf="transactionForm.get('amount')?.invalid" class="text-danger">Amount can not be less than 0.</small>
+            </div>
         </div>
-    </div> -->
-
-    <div>
-        <label for="transactionType">Transaction Type:</label>
-        <!-- <select name="transactionType" id="transactionType" formControlName="transactionType">
-            <option value="deposit">Deposit</option>
-            <option value="withdrawal">Withdrawal</option>
-        </select> -->
-        <input type="text" id="transactionType" formControlName="transactionType">
-        <!-- <div *ngIf="transactionForm.get('transactionType').touched">
-            <small *ngIf="transactionForm.get('transactionType').invalid">Transaction Type is required.</small>
-        </div> -->
-    </div>
-    
-    <button type="submit" [disabled]="transactionForm.invalid">Submit</button>
-</form>
+        <div class="mb-3">
+            <label for="transactionType" class="form-label"><b>Transaction Type:</b></label>
+            <div class="form-check">
+                <label for="credit" class="form-check-label">
+                    <input class="form-check-input" type="radio" name="credit" id="credit">Credit
+                </label>
+            </div>
+            <div class="form-check">
+                <label for="debit" class="form-check-label">
+                    <input class="form-check-input" type="radio" name="debit" id="debit">Debit
+                </label>
+            </div>
+        </div>
+        
+        <button type="submit" [disabled]="transactionForm.invalid" class="mb-3 btn btn-primary">Create Transaction</button>
+        <a class="text-center text-primary nav-link mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
+    </form>
+</div>

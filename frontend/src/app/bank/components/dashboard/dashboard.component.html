@@ -1,0 +1,129 @@
+<app-navbar></app-navbar>
+<main class="container">
+    <div *ngIf="role === 'ADMIN'; else userDashboard">
+        <h2 class="mb-3">Welcome ADMIN</h2>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Customers List</h3>
+            <table class="table table-bordered mb-3">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{customer.customerId}}</td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.role}}</td>
+                        <td>
+                            <button class="btn btn-success">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Accounts List</h3>
+            <table class="table table-bordered">
+                <thead class="table-primary mb-3">
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Balance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of accounts">
+                        <td>{{account.accountId}}</td>
+                        <td>{{account.customer.customerId}}</td>
+                        <td>{{account.customer.name}}</td>
+                        <td>{{account.balance}}</td>
+                        <td>
+                            <button class="btn btn-success">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Transactions List</h3>
+            <table class="table table-bordered mb-3">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Transaction Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td>{{transaction.accounts.accountId}}</td>
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.transactionDate}}</td>
+                        <td>{{transaction.transactionType}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ng-template #userDashboard>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Customers Details</h3>
+            <p><b>Name: </b>{{loggedInCustomer.name}}</p>
+            <p><b>Email: </b>{{loggedInCustomer.email}}</p>
+            <p><b>Username: </b>{{loggedInCustomer.username}}</p>
+        </div>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Accounts List</h3>
+            <table class="table table-bordered mb-3">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of accounts">
+                        <td>{{account.accountId}}</td>
+                        <td>{{account.customer.customerId}}</td>
+                        <td>{{account.customer.name}}</td>
+                        <td>{{account.balance}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container card mb-3">
+            <h3 class="mb-3">Transactions List</h3>
+            <table class="table table-bordered mb-3">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Transaction Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td>{{transaction.accounts.accountId}}</td>
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.transactionDate}}</td>
+                        <td>{{transaction.transactionType}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>
+</main>

@@ -1,0 +1,17 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card bg-light mb-3">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" name="username" id="username" formControlName="username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" name="password" id="password" formControlName="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success" class="form-action">Login</button>
+        <a [routerLink]="['/auth/add-user']" class="text-center mb-3"><b>Sign up</b></a>
+    </form>
+    <div *ngIf="loginError$ | async as loginError" class="card bg-light">
+        <p class="text-danger text-center">{{loginError.message}}</p>
+    </div>
+</div>
