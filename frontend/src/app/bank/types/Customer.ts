@@ -5,6 +5,7 @@ export class Customer {
     password: string;
     username: string;
     role?: string;
+    
     constructor(data: any)
     {
         this.customerId=data.customerId;
