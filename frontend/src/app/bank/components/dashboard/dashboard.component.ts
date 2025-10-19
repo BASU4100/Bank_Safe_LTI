@@ -11,21 +11,26 @@ import { Router } from '@angular/router';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    customers: Customer[];
-    accounts: Account[];
-    transactions: Transaction[];
+    customers: Customer[] = [];
+    accounts: Account[] = [];
+    transactions: Transaction[] = [];
+    loggedInCustomer: Customer;
 
-    role: string | null;
-    userId: number;
+    role: string;
+    userId: string;
 
     constructor(private bankService: BankService, private router: Router) { }
 
     ngOnInit(): void {
-        this.role = localStorage.getItem("role");
-        this.userId = Number(localStorage.getItem("user_id"));
+        this.role = localStorage.getItem("role") as string;
+        this.userId = localStorage.getItem("user_id") as string;
         if (this.role === 'ADMIN') {
             console.log('loadAdminData');
             this.loadAdminData();
+        }
+        else {
+            console.log('loadUserDate');
+            this.loadUserData();
         }
     }
 
@@ -49,6 +54,28 @@ export class DashboardComponent implements OnInit {
                 this.transactions = response;
             },
             error: (error) => console.log('Error loading transactions', error)
+        });
+    }
+
+    loadUserData(): void {
+        this.bankService.getCustomerById(Number(this.userId)).subscribe({
+            next: (response) => {
+                this.loggedInCustomer = response;
+            },
+            error: (error) => console.log('Error loading logged in customer details', error)
+        });
+        this.bankService.getAccountsByUser(this.userId).subscribe({
+            next: (response) => {
+                this.accounts = response;
+            },
+            error: (error) => console.log('Error loading account for user', error)
+        })
+
+        this.bankService.getAllTransactionsByCustomerId(this.userId).subscribe({
+            next: (response) => {
+                this.transactions = response;
+            },
+            error: (error) => console.log('Error loading transactions by user', error)
         });
     }
 }

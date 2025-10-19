@@ -1,36 +1,72 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { TransactionTS } from "../../types/tstypes/Transactionts";
-import { Transaction } from "../../types/Transaction";
-import { FormsModule, ReactiveFormsModule, FormControl } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BankService } from '../../services/bank.service';
+import { Account } from '../../types/Account';
+import { Customer } from '../../types/Customer';
+import { Transaction } from '../../types/Transaction';
+import { TransactionTS } from '../../types/tstypes/Transactionts';
 
 @Component({
-    selector: 'app-transaction',
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './transaction.component.html',
-    styleUrls: ['./transaction.component.scss']
+  selector: 'app-transaction',
+  templateUrl: './transaction.component.html',
+  styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent implements OnInit{
-    transactionForm: FormGroup;
-    transaction: TransactionTS;
+export class TransactionComponent implements OnInit {
+  transactionForm: FormGroup;
+  accounts: Account[];
+  date:Date;
+  role: string|null;
+  userId: string|null;
+  transactionError: string;
+  transactionSuccess: string;
+  users: Customer[];
+  isFormSubmitted: boolean = false;
 
-    constructor(private fb: FormBuilder) {}
-    
-    ngOnInit(): void {
-        this.transactionForm = this.fb.group({
-            accountId: [null, Validators.required],
-            transactionType: [null, Validators.required],
-            amount: [null, [Validators.required, Validators.min(0)]],
-            transactionDate: [null, [Validators.required]],
-            transactionId: [null],
-        });
-    }
+  constructor(
+    private fb: FormBuilder,
+    private bankService: BankService,
+    private router: Router
+    ) {}
 
-    onSubmit() {
-        if (this.transactionForm.valid) {
-            this.transaction = new TransactionTS(this.transactionForm.get('accountId')?.value, this.transactionForm.get('amount')?.value, this.transactionForm.get('transactionDate')?.value, this.transactionForm.get('transactionType')?.value);
+  ngOnInit() {
+    this.role = localStorage.getItem("role");
+    this.userId = localStorage.getItem("user_id");
+    if(this.role=='USER') {
+      this.bankService.getAccountsByUser(this.userId).subscribe({
+        next: (response) => {
+          this.accounts = response;
         }
+      })
     }
+    this.transactionForm = this.fb.group({
+      accounts: [null, Validators.required],
+      transactionType: [null, Validators.required],
+      amount: [null, [Validators.required, Validators.min(1)]]
+    });
+  }
+
+  onSubmit() {
+    this.isFormSubmitted = true;
+    if (this.transactionForm.invalid) {
+      return;
+    } else {
+      const data = this.transactionForm.value;
+      console.log(data);
+      data.transactionDate = new Date();
+      const transaction: Transaction = new Transaction(data);
+      console.log(transaction);
+      this.bankService.performTransaction(transaction).subscribe({
+        next: (response) => {
+            this.transactionError = "";
+            this.transactionSuccess = "Transaction performed successfully";
+        },
+        error: (error) => {
+          this.transactionSuccess = "";
+          this.transactionError = error.error;
+          console.log('Error performing transactions', error)
+        }
+      });
+    }
+  }
 }

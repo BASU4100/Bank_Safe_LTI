@@ -5,11 +5,11 @@
     </div> -->
     
     <div>
-        <label for="accountId">Account ID:</label>
-        <input type="text" name="accountId" id="accountId" formControlName="accountId">
-        <!-- <div *ngIf="transactionForm.get('accountId').touched">
-            <small *ngIf="transactionForm.get('accountId').invalid">Account Id is required.</small>
-        </div> -->
+        <label for="accounts">Accounts:</label>
+        <input type="text" name="accounts" id="accounts" formControlName="accounts">
+        <div *ngIf="transactionForm.get('accounts')?.touched">
+            <small *ngIf="transactionForm.get('accounts')?.invalid">Accounts is required.</small>
+        </div>
     </div>
     
     <div>
@@ -20,13 +20,13 @@
         </div> -->
     </div>
 
-    <div>
+    <!-- <div>
         <label for="transactionDate">Transaction Date:</label>
         <input type="date" name="transactionDate" id="transactionDate" formControlName="transactionDate">
-        <!-- <div *ngIf="transactionForm.get('transactionDate').touched">
+        <div *ngIf="transactionForm.get('transactionDate').touched">
             <small *ngIf="transactionForm.get('transactionDate').invalid">Transaction Dateis required.</small>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
 
     <div>
         <label for="transactionType">Transaction Type:</label>
