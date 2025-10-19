@@ -1,52 +1,56 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { CommonModule } from "@angular/common";
-import { BankService } from "../../services/bank.service";
-import { Customer } from "../../types/Customer";
-import { Account } from "../../types/Account";
+import { Component, OnInit } from '@angular/core';
+import { Account } from '../../types/Account';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BankService } from '../../services/bank.service';
+import { Customer } from '../../types/Customer';
 
 @Component({
-    selector: 'app-account',
-    // standalone: true,
-    // imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './account.component.html',
-    styleUrls: ['./account.component.scss']
+  selector: 'app-accounts',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-    accountForm!: FormGroup;
-    account: Account | undefined;
-    customers: Customer[];
-    errorMessage: string;
-    successMessage: string;
-    constructor(private formBuilder: FormBuilder, private banksService: BankService){}
+  accountForm!: FormGroup;
+  account: Account | undefined;
+  customers: Customer[] = [];
+  errorMessage: string = '';
+  successMessage: string = '';
 
-    ngOnInit(): void {
-        this.accountForm = this.formBuilder.group({
-            // account_id: ['', [Validators.required]],
-            customer: ['', [Validators.required]],
-            balance: ['', [Validators.required, Validators.min(0)]]
-        });
-        // this.account = new AccountTS("1", 1000.00, "1");
-        this.loadCustomers();
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private banksService: BankService
+  ) { }
 
-    onSubmit(): void {
-        if (this.accountForm.valid) {
-        //   this.account = new Account(this.accountForm.value);
-            this.banksService.addAccount(this.accountForm.value).subscribe(data =>
-            this.account=data
-            )
-            this.successMessage = 'Account created successfully';
-            this.errorMessage = '';
-        } else {
-            this.successMessage = '';
-            this.errorMessage = 'Please fill out all required fields correctly.';
-        }
-    }
+  ngOnInit(): void {
+    this.loadCustomers();
+    this.accountForm = this.formBuilder.group({
+      customer: [null, [Validators.required]],
+      balance: ["", [Validators.required, Validators.min(0)]],
+    });
+  }
 
-    loadCustomers(): void {
-        // this.banksService.getAllCustomers().subscribe(data =>
-        //     this.customers=data
-        // )
+  loadCustomers(): void {
+    this.banksService.getAllCustomers().subscribe({
+      next: (response) => {
+        this.customers = response;
+      },
+      error: (error) => console.log('Error in loading customers')
+    })
+  }
+
+  onSubmit(): void {
+    if (this.accountForm.valid) {
+      this.banksService.addAccount(this.accountForm.value).subscribe({
+        next: (response) => {
+          this.successMessage = 'Account created successfully';
+          this.errorMessage = '';
+          this.accountForm.reset();
+        },
+        error: (error) => this.errorMessage = error.error
+      });
+    } else {
+      this.errorMessage = 'Please fill out all required fields correctly.';
+      this.successMessage = '';
     }
+  }
 }
