@@ -1,0 +1,24 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5">
+    <h3 class="text-center m-3">Update Account</h3>
+    <div class="mb-3">
+        <label for="customer" class="form-label"><b>Customer:</b></label>
+        <select name="customer" id="customer" formControlName="customer" class="form-control">
+            <option *ngFor="let customer of customers" [value]="customer"></option>
+        </select>
+        <div *ngIf="accountForm.get('customer')?.touched">
+            <small *ngIf="accountForm.get('customer')?.invalid" class="text-danger">Customer is required.</small>
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        <label for="balance" class="form-label"><b>Balance:</b></label>
+        <input type="number" name="balance" id="balance" formControlName="balance" class="form-control">
+        <div *ngIf="accountForm.get('balance')?.touched">
+            <small *ngIf="accountForm.get('balance')?.invalid" class="text-danger">Balance cannot be negative.</small>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="accountForm.invalid" class="btn btn-primary mb-3 form-action">Update Account</button>
+    <a class="form-action nav-link text-primary text-center mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
+
+</form>

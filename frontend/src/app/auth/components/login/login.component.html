@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-sm mt-5">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="card bg-light mb-3">
         <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
@@ -11,7 +11,7 @@
         <button type="submit" class="btn btn-success" class="form-action">Login</button>
         <a [routerLink]="['/auth/add-user']" class="text-center mb-3"><b>Sign up</b></a>
     </form>
-    <div *ngIf="loginError$ | async as loginError" class="card bg-light">
-        <p class="text-danger text-center">{{loginError.message}}</p>
+    <div *ngIf="loginError$ | async as loginError" class="card bg-danger-subtle">
+        <p class="text-danger text-center fw-bold">{{loginError.message}}</p>
     </div>
 </div>

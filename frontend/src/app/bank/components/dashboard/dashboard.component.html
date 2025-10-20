@@ -3,8 +3,8 @@
     <div *ngIf="role === 'ADMIN'; else userDashboard">
         <h2 class="mb-3">Welcome ADMIN</h2>
         <div class="container card mb-3">
-            <h3 class="mb-3">Customers List</h3>
-            <table class="table table-bordered mb-3">
+            <h3 class="mb-3 mt-3">Customers List</h3>
+            <table *ngIf="customers.length; else noRecord" class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
                         <th>Customer ID</th>
@@ -21,7 +21,7 @@
                         <td>{{customer.email}}</td>
                         <td>{{customer.role}}</td>
                         <td>
-                            <button class="btn btn-success">Edit</button>
+                            <button class="btn btn-success" [routerLink]="['/bank/customer/edit']">Edit</button>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -29,8 +29,8 @@
             </table>
         </div>
         <div class="container card mb-3">
-            <h3 class="mb-3">Accounts List</h3>
-            <table class="table table-bordered">
+            <h3 class="mb-3 mt-3">Accounts List</h3>
+            <table *ngIf="accounts.length; else noRecord" class="table table-bordered">
                 <thead class="table-primary mb-3">
                     <tr>
                         <th>Account ID</th>
@@ -47,7 +47,7 @@
                         <td>{{account.customer.name}}</td>
                         <td>{{account.balance}}</td>
                         <td>
-                            <button class="btn btn-success">Edit</button>
+                            <button class="btn btn-success" [routerLink]="['/bank/account/edit']">Edit</button>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -55,8 +55,8 @@
             </table>
         </div>
         <div class="container card mb-3">
-            <h3 class="mb-3">Transactions List</h3>
-            <table class="table table-bordered mb-3">
+            <h3 class="mb-3 mt-3">Transactions List</h3>
+            <table *ngIf="transactions.length; else noRecord" class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
                         <th>Account ID</th>
@@ -78,13 +78,13 @@
     </div>
     <ng-template #userDashboard>
         <div class="container card mb-3">
-            <h3 class="mb-3">Customers Details</h3>
+            <h3 class="mb-3 mt-3">Customers Details</h3>
             <p><b>Name: </b>{{loggedInCustomer.name}}</p>
             <p><b>Email: </b>{{loggedInCustomer.email}}</p>
             <p><b>Username: </b>{{loggedInCustomer.username}}</p>
         </div>
-        <div class="container card mb-3">
-            <h3 class="mb-3">Accounts List</h3>
+        <div class="container card mb-3 mt-3">
+            <h3 class="mb-3 mt-3">Accounts List</h3>
             <table class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
@@ -105,7 +105,7 @@
             </table>
         </div>
         <div class="container card mb-3">
-            <h3 class="mb-3">Transactions List</h3>
+            <h3 class="mb-3 mt-3">Transactions List</h3>
             <table class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
@@ -124,6 +124,11 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </ng-template>
+    <ng-template #noRecord>
+        <div class="container card mb-3 bg-danger-subtle">
+            <p class="text-danger text-center p-3 fw-bold">No Records Found.</p>
         </div>
     </ng-template>
 </main>

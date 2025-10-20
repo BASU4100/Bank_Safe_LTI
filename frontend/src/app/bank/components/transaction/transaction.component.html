@@ -4,7 +4,7 @@
         <div class="mb-3">
             <label for="accounts" class="form-label"><b>Account:</b></label>
             <select name="accounts" id="accounts" class="form-control">
-                <option value="{{account.accountId}}" *ngFor="let account of accounts">{{account.accountId}}</option>
+                <option [value]="account.accountId" *ngFor="let account of accounts">{{account.accountId}}</option>
             </select>
             <div *ngIf="transactionForm.get('accounts')?.touched">
                 <small *ngIf="transactionForm.get('accounts')?.invalid" class="text-danger">Accounts is required.</small>

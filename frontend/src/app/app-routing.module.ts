@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from "@angular/common";
+import { BankRoutingModule } from "./bank/bank-routing.module";
 
 const routes: Routes = [
   {
@@ -23,10 +25,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent // Declare AppComponent
+    AppComponent,
+     // Declare AppComponent
   ],
   imports: [
     BrowserModule,
+    // CommonModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
