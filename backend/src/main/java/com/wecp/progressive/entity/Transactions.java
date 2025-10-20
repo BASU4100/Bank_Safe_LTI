@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Transactions {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionId;
     // private int accountId;
     private double amount;

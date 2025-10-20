@@ -12,7 +12,7 @@ import { Account } from "../types/Account";
 export class BankService {
   private baseUrl = `${environment.apiUrl}`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addCustomer(customer: Customer): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/customers`, customer);
@@ -73,10 +73,7 @@ export class BankService {
   }
 
   performTransaction(transaction: Transaction): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/transactions`,
-      transaction
-    );
+    return this.http.post<any>(`${this.baseUrl}/transactions`, transaction);
   }
 
   getAllTranactions(): Observable<Transaction[]> {

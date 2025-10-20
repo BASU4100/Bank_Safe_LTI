@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BankService } from '../../services/bank.service';
 import { Customer } from '../../types/Customer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -17,7 +18,8 @@ export class CustomersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private banksService: BankService
+    private banksService: BankService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +41,17 @@ export class CustomersComponent implements OnInit {
 
   onSubmit(): void {
     if (this.customerForm.valid) {
+      this.isFormSubmitted = true;
       this.banksService.addCustomer(this.customerForm.value).subscribe({
         next: (response) => {
           this.customer = response;
           this.customerSuccess = 'Customer created successfully';
           this.customerError = '';
           this.customerForm.reset();
+          setTimeout(() => {
+            this.customerSuccess = '';
+            this.router.navigate(['/bank']);
+          }, 3000);
         },
         error: (error) => this.customerError = error.error
       });

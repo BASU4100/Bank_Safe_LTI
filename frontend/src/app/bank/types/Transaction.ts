@@ -8,7 +8,7 @@ export class Transaction {
     constructor(data: any)
     {
         this.amount=data.amount;
-        this.transactionDate=data.transactionDate;
+        this.transactionDate=new Date();
         this.transactionType=data.transactionType;
         this.accounts=data.accounts;
     }

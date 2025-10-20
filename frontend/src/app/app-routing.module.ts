@@ -2,9 +2,10 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 import { BankRoutingModule } from "./bank/bank-routing.module";
+import { AuthInterceptor } from "./auth.interceptors";
 
 const routes: Routes = [
   {
@@ -26,13 +27,20 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-     // Declare AppComponent
+    // Declare AppComponent
   ],
   imports: [
     BrowserModule,
     // CommonModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent] // Bootstrap AppComponent
 })

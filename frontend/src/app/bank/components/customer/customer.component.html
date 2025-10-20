@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5" novalidate>
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3 mt-5 w-50" novalidate>
     <h2 class="text-center m-3">Create Customer</h2>
     <div class="mb-3">
         <label for="name" class="form-label"><b>Name:</b></label>
@@ -30,12 +30,12 @@
     </div>
     <div class="mb-3">
         <label for="role" class="form-label"><b>Role:</b></label>
-        <select name="role" id="role" class="form-select">
+        <select name="role" id="role" class="form-select" formControlName="role">
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
     </div>
-    <button type="submit" [disabled]="customerForm.valid" class="btn btn-primary mb-3">Create Customer</button>
+    <button type="submit" [disabled]="customerForm.invalid" class="btn btn-primary mb-3">Create Customer</button>
     <a [routerLink]="['/bank']" class="nav-link mb-3 text-center text-primary"><b>Dashboard</b></a>
 </form>
-<p *ngIf="isFormSubmitted">{{!!customerSuccess ? customerSuccess: customerError}}</p>
+<p *ngIf="isFormSubmitted" class="container card p-3 w-50 fw-50 text-center" [class]="customerSuccess ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!customerSuccess ? customerSuccess: customerError}}</p>

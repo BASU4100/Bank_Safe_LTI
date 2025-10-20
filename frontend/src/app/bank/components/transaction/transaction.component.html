@@ -1,13 +1,13 @@
-<div class="container">
-    <h1 class="text-center mb-3">Perform a Transaction</h1>
-    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3">
+<div class="container mt-5">
+    <h2 class="text-center mb-3">Perform a Transaction</h2>
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3 p-3 w-50">
         <div class="mb-3">
             <label for="accounts" class="form-label"><b>Account:</b></label>
-            <select name="accounts" id="accounts" class="form-control">
+            <select name="accounts" id="accounts" class="form-control" formControlName="accounts">
                 <option [value]="account.accountId" *ngFor="let account of accounts">{{account.accountId}}</option>
             </select>
             <div *ngIf="transactionForm.get('accounts')?.touched">
-                <small *ngIf="transactionForm.get('accounts')?.invalid" class="text-danger">Accounts is required.</small>
+                <small *ngIf="transactionForm.get('accounts')?.invalid" class="text-danger">Account is required.</small>
             </div>
         </div>
         
@@ -19,20 +19,21 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="transactionType" class="form-label"><b>Transaction Type:</b></label>
-            <div class="form-check">
-                <label for="credit" class="form-check-label">
-                    <input class="form-check-input" type="radio" name="credit" id="credit">Credit
-                </label>
-            </div>
-            <div class="form-check">
-                <label for="debit" class="form-check-label">
-                    <input class="form-check-input" type="radio" name="debit" id="debit">Debit
-                </label>
+            <label class="form-label"><b>Transaction Type:</b></label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="transactionType" id="credit" value="credit">
+                    <label class="form-check-label" for="credit">Credit</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="transactionType" id="debit" value="debit">
+                    <label class="form-check-label" for="debit">Debit</label>
+                </div>
             </div>
         </div>
         
         <button type="submit" [disabled]="transactionForm.invalid" class="mb-3 btn btn-primary">Create Transaction</button>
         <a class="text-center text-primary nav-link mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
     </form>
+    <div *ngIf="transactionError || transactionSuccess" [class]="transactionError ? 'bg-danger-subtle text-danger text-center': 'bg-success-subtle text-success text-center'" class="container card p-3 fw-bold w-50">{{transactionError ? transactionError : transactionSuccess}}</div>
 </div>

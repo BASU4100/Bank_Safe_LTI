@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Accounts implements Comparable<Accounts> {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
     // private int customerId;
     private double balance;

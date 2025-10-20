@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class CreditCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cardNumber;
     private String cardHolderName;

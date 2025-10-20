@@ -1,9 +1,9 @@
-<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5">
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5 w-50">
     <h3 class="text-center m-3">Create Account</h3>
     <div class="mb-3">
         <label for="customer" class="form-label"><b>Customer:</b></label>
         <select name="customer" id="customer" formControlName="customer" class="form-control">
-            <option *ngFor="let customer of customers" [value]="customer"></option>
+            <option *ngFor="let customer of customers" value="customer">{{customer.customerId}}</option>
         </select>
         <div *ngIf="accountForm.get('customer')?.touched">
             <small *ngIf="accountForm.get('customer')?.invalid" class="text-danger">Customer is required.</small>

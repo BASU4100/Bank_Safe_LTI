@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Loan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long loanId;
     private String loanType;
     private double amount;

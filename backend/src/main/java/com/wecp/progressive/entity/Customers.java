@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Customers implements Comparable<Customers> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
     private String name;
     private String email;

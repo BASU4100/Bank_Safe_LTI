@@ -40,9 +40,9 @@ export class TransactionComponent implements OnInit {
       })
     }
     this.transactionForm = this.fb.group({
-      accounts: [null, Validators.required],
+      accounts: ['', Validators.required],
+      amount: [null, [Validators.required, Validators.min(1)]],
       transactionType: [null, Validators.required],
-      amount: [null, [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -60,6 +60,10 @@ export class TransactionComponent implements OnInit {
         next: (response) => {
             this.transactionError = "";
             this.transactionSuccess = "Transaction performed successfully";
+            setTimeout(() => {
+              this.transactionSuccess = '';
+              this.router.navigate(['/bank']);
+            }, 3000);
         },
         error: (error) => {
           this.transactionSuccess = "";

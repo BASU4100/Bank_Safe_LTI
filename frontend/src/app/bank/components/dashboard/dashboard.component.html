@@ -21,8 +21,8 @@
                         <td>{{customer.email}}</td>
                         <td>{{customer.role}}</td>
                         <td>
-                            <button class="btn btn-success" [routerLink]="['/bank/customer/edit']">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-success mx-1" [routerLink]="['/bank/customer/edit']">Edit</button>
+                            <button class="btn btn-danger" (click)="onDelete(customer.customerId!)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -47,7 +47,7 @@
                         <td>{{account.customer.name}}</td>
                         <td>{{account.balance}}</td>
                         <td>
-                            <button class="btn btn-success" [routerLink]="['/bank/account/edit']">Edit</button>
+                            <button class="btn btn-success mx-1" [routerLink]="['/bank/account/edit']">Edit</button>
                             <button class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -85,7 +85,7 @@
         </div>
         <div class="container card mb-3 mt-3">
             <h3 class="mb-3 mt-3">Accounts List</h3>
-            <table class="table table-bordered mb-3">
+            <table *ngIf="accounts.length; else noRecord" class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
                         <th>Account ID</th>
@@ -106,7 +106,7 @@
         </div>
         <div class="container card mb-3">
             <h3 class="mb-3 mt-3">Transactions List</h3>
-            <table class="table table-bordered mb-3">
+            <table *ngIf="transactions.length; else noRecord" class="table table-bordered mb-3">
                 <thead class="table-primary">
                     <tr>
                         <th>Account ID</th>

@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
             this.loadAdminData();
         }
         else {
-            console.log('loadUserDate');
+            console.log('loadUserData');
             this.loadUserData();
         }
     }
@@ -77,5 +77,15 @@ export class DashboardComponent implements OnInit {
             },
             error: (error) => console.log('Error loading transactions by user', error)
         });
+    }
+
+    onDelete(customerId: string): void {
+        if(confirm("Are you sure you want to delete the User!!!")) {
+            this.bankService.deleteCustomer(+customerId).subscribe({
+                next: () => alert("Customer Delete Successfully!"),
+                error: () => alert("Error Occured while deleting.")
+            });
+            this.ngOnInit();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Accounts;
+import com.wecp.progressive.repository.CustomerRepository;
 import com.wecp.progressive.repository.TransactionRepository;
 import com.wecp.progressive.service.impl.AccountServiceImplJpa;
 
@@ -18,6 +19,8 @@ public class AccountController {
     private final AccountServiceImplJpa accountServiceImplJpa;
     @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public AccountController(AccountServiceImplJpa accountServiceImplJpa) {
         this.accountServiceImplJpa = accountServiceImplJpa;
@@ -40,14 +43,20 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<Integer> addAccount(@RequestBody Accounts accounts) throws SQLException {
+        if (accounts.getCustomer()==null || accounts.getCustomer().getCustomerId()==null || customerRepository.findByCustomerId(accounts.getCustomer().getCustomerId())==null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(accountServiceImplJpa.addAccount(accounts), HttpStatus.CREATED);
     }
 
     @PutMapping("/{accountId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateAccount(@PathVariable Integer accountId, @RequestBody Accounts accounts) throws SQLException {
+    public ResponseEntity<Void> updateAccount(@PathVariable Integer accountId, @RequestBody Accounts accounts) throws SQLException {
+        if (accounts.getCustomer()==null || accounts.getCustomer().getCustomerId()==null || customerRepository.findByCustomerId(accounts.getCustomer().getCustomerId())==null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         accounts.setAccountId(accountId);
         accountServiceImplJpa.updateAccount(accounts);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{accountId}")
