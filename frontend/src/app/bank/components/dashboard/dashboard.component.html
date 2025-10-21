@@ -69,7 +69,7 @@
                     <tr *ngFor="let transaction of transactions">
                         <td>{{transaction.accounts.accountId}}</td>
                         <td>{{transaction.amount}}</td>
-                        <td>{{transaction.transactionDate}}</td>
+                        <td>{{transaction.transactionDate | date}}</td>
                         <td>{{transaction.transactionType}}</td>
                     </tr>
                 </tbody>
