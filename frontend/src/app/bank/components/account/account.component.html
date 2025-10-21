@@ -1,9 +1,9 @@
-<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5 w-50">
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mt-5 mb-3 w-50">
     <h3 class="text-center m-3">Create Account</h3>
     <div class="mb-3">
         <label for="customer" class="form-label"><b>Customer:</b></label>
         <select name="customer" id="customer" formControlName="customer" class="form-control">
-            <option *ngFor="let customer of customers" value="customer">{{customer.customerId}}</option>
+            <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.name}}</option>
         </select>
         <div *ngIf="accountForm.get('customer')?.touched">
             <small *ngIf="accountForm.get('customer')?.invalid" class="text-danger">Customer is required.</small>
@@ -21,3 +21,4 @@
     <button type="submit" [disabled]="accountForm.invalid" class="btn btn-primary mb-3 form-action">Create Account</button>
     <a class="form-action nav-link text-primary text-center mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
 </form>
+<p *ngIf="isFormSubmitted" class="container card p-3 w-50 fw-50 text-center" [class]="successMessage ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!successMessage ? successMessage: errorMessage}}</p>

@@ -79,10 +79,20 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    onDelete(customerId: string): void {
+    onDeleteUser(customerId: string): void {
         if(confirm("Are you sure you want to delete the User!!!")) {
             this.bankService.deleteCustomer(+customerId).subscribe({
                 next: () => alert("Customer Delete Successfully!"),
+                error: () => alert("Error Occured while deleting.")
+            });
+            this.ngOnInit();
+        }
+    }
+
+    onDeleteAccount(accountId: number): void {
+        if(confirm("Are you sure you want to delete the Account!!!")) {
+            this.bankService.deleteAccount(accountId).subscribe({
+                next: () => alert("Account Delete Successfully!"),
                 error: () => alert("Error Occured while deleting.")
             });
             this.ngOnInit();

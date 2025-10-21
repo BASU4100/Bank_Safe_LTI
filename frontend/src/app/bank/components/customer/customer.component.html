@@ -25,7 +25,7 @@
         <label for="password" class="form-label"><b>Password:</b></label>
         <input type="password" name="password" id="password" formControlName="password" class="form-control">
         <div *ngIf="customerForm.get('password')?.touched">
-            <small *ngIf="customerForm.get('password')?.invalid" class="text-danger">Password is required.</small>
+            <small *ngIf="customerForm.get('password')?.invalid" class="text-danger">Password must have atleast 8 characters.</small>
         </div>
     </div>
     <div class="mb-3">
@@ -34,6 +34,9 @@
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
+        <div *ngIf="customerForm.get('role')?.touched">
+            <small *ngIf="customerForm.get('role')?.invalid" class="text-danger">Role is required.</small>
+        </div>
     </div>
     <button type="submit" [disabled]="customerForm.invalid" class="btn btn-primary mb-3">Create Customer</button>
     <a [routerLink]="['/bank']" class="nav-link mb-3 text-center text-primary"><b>Dashboard</b></a>

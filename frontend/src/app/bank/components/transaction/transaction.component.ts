@@ -63,7 +63,7 @@ export class TransactionComponent implements OnInit {
             setTimeout(() => {
               this.transactionSuccess = '';
               this.router.navigate(['/bank']);
-            }, 3000);
+            }, 1500);
         },
         error: (error) => {
           this.transactionSuccess = "";

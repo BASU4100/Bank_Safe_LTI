@@ -12,7 +12,7 @@ export class Customer {
         this.name=data.name;
         this.email=data.email;
         this.password=data.password;
-        this.username=data.password;
+        this.username=data.username;
         this.role=data.role;
     }
     

@@ -21,8 +21,8 @@
                         <td>{{customer.email}}</td>
                         <td>{{customer.role}}</td>
                         <td>
-                            <button class="btn btn-success mx-1" [routerLink]="['/bank/customer/edit']">Edit</button>
-                            <button class="btn btn-danger" (click)="onDelete(customer.customerId!)">Delete</button>
+                            <button class="btn btn-success mx-1" [routerLink]="['/bank/customer/edit', customer.customerId ]">Edit</button>
+                            <button class="btn btn-danger" (click)="onDeleteUser(customer.customerId!)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -47,8 +47,8 @@
                         <td>{{account.customer.name}}</td>
                         <td>{{account.balance}}</td>
                         <td>
-                            <button class="btn btn-success mx-1" [routerLink]="['/bank/account/edit']">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-success mx-1" [routerLink]="['/bank/account/edit', account.accountId]">Edit</button>
+                            <button class="btn btn-danger" (click)="onDeleteAccount(account.accountId!)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -119,7 +119,7 @@
                     <tr *ngFor="let transaction of transactions">
                         <td>{{transaction.accounts.accountId}}</td>
                         <td>{{transaction.amount}}</td>
-                        <td>{{transaction.transactionDate}}</td>
+                        <td>{{transaction.transactionDate | date }}</td>
                         <td>{{transaction.transactionType}}</td>
                     </tr>
                 </tbody>

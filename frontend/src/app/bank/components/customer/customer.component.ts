@@ -51,7 +51,7 @@ export class CustomersComponent implements OnInit {
           setTimeout(() => {
             this.customerSuccess = '';
             this.router.navigate(['/bank']);
-          }, 3000);
+          }, 1500);
         },
         error: (error) => this.customerError = error.error
       });

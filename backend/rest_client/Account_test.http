@@ -1,13 +1,13 @@
-# POST http://localhost:5000/accounts
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+POST http://localhost:5000/accounts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
 
-# {
-#     "balance": 40000,
-#     "customer": {
-#         "customerId": 3
-#         }
-# }
+{
+    "balance": 40000,
+    "customer": {
+        "customerId": 3
+        }
+}
 
 # {
 #     "balance": 40000,

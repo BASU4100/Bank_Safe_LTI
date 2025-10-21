@@ -5,7 +5,7 @@ export class Account {
     balance: number;
     constructor(data: any){
         this.accountId=data.accountId;
-        this.customer=data.customer;
+        this.customer = data.customer;
         this.balance=data.balance;
     }
 }

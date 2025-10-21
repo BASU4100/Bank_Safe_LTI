@@ -49,7 +49,7 @@ export class EditCustomerComponent implements OnInit {
                     role: customer.role
                 });
             },
-            error: (error) => {
+            error: () => {
                 this.customerError = 'Error loading customer details.';
                 console.log(this.customerError);
             }
@@ -66,6 +66,8 @@ export class EditCustomerComponent implements OnInit {
     onSubmit(): void {
         if (this.customerForm.valid) {
             const updatedCustomer: Customer = new Customer(this.customerForm.value);
+            updatedCustomer.customerId = this.customerId+"";
+            updatedCustomer.email = this.customer.email;
             this.banksService.editCustomer(updatedCustomer).subscribe({
                 next: (response) => {
                     this.customer = response;

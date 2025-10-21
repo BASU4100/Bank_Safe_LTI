@@ -27,12 +27,12 @@
     </div>
     <div class="mb-3">
         <label for="role" class="form-label"><b>Role:</b></label>
-        <select name="role" id="role" class="form-select">
+        <select name="role" id="role" class="form-select" formControlName="role">
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
     </div>
-    <button type="submit" [disabled]="customerForm.valid" class="btn btn-primary mb-3">Update Customer</button>
+    <button type="submit" [disabled]="customerForm.invalid" class="btn btn-primary mb-3">Update Customer</button>
     <a [routerLink]="['/bank']" class="nav-link mb-3 text-center text-primary"><b>Dashboard</b></a>
 </form>
 <p *ngIf="customerSuccess">{{!!customerSuccess ? customerSuccess: customerError}}</p>
