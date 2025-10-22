@@ -1,5 +1,7 @@
 package com.wecp.progressive.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,7 @@ import com.wecp.progressive.entity.Transactions;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transactions, Integer> {
 
-    Transactions findByAccountsAccountId(Integer accountId);
+    List<Transactions> findByAccountsAccountId(Integer accountId);
 
     void deleteByAccountsAccountId(Integer accountId);
 

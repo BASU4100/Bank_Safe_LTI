@@ -63,7 +63,8 @@ public class CustomerServiceImplJpa implements CustomerService {
         if (fetchedCustomers!=null && fetchedCustomers.getCustomerId()!=customers.getCustomerId()) {
             throw new CustomerAlreadyExistsException("This customers email is already associated with some other customer");
         }
-        customers.setPassword(passwordEncoder.encode(customers.getPassword()));
+        if (fetchedCustomers!=null && !fetchedCustomers.getPassword().equals(customers.getPassword()))
+            customers.setPassword(passwordEncoder.encode(customers.getPassword()));
         customerRepository.save(customers);
     }
 

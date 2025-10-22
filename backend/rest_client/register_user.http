@@ -9,13 +9,13 @@ Content-Type: application/json
 
 
 //Registeration Json
-# {
-#     "name": "Basu",
-#     "email": "example@example.com",
-#     "username": "BASU4100",
-#     "password": "pass123",
-#     "role": "USER"
-# }
+{
+    "name": "Basu",
+    "email": "example@example.com",
+    "username": "BASU4100",
+    "password": "basu1234",
+    "role": "USER"
+}
 
 # {
 #     "name": "Vivek",

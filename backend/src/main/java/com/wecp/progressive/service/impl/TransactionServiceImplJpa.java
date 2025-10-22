@@ -44,7 +44,7 @@ public class TransactionServiceImplJpa implements TransactionService {
             throw new WithdrawalLimitException("Withdrawal limit is 30000");
         }
         double balance = accountRepository.findByAccountId(transaction.getAccounts().getAccountId()).getBalance();
-        if (transaction.getTransactionType().equalsIgnoreCase("DEPOSIT")) {
+        if (transaction.getTransactionType().equalsIgnoreCase("credit")) {
             balance += transaction.getAmount();
         }
         else {
@@ -76,7 +76,7 @@ public class TransactionServiceImplJpa implements TransactionService {
         List<Accounts> accList = accountRepository.getAccountsByCustomerCustomerId(customerId);
         if (accList.isEmpty())
             throw new AccountNotFoundException("Account not found");
-        List<Transactions> transactionList = accList.stream().map(acc -> transactionRepository.findByAccountsAccountId(acc.getAccountId())).collect(Collectors.toList());
+        List<Transactions> transactionList = accList.stream().flatMap(acc -> transactionRepository.findByAccountsAccountId(acc.getAccountId()).stream()).collect(Collectors.toList());
         return transactionList;
     }
 }

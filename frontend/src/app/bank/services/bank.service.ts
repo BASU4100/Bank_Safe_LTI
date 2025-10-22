@@ -82,8 +82,8 @@ export class BankService {
     );
   }
 
-  getAllTransactionsByCustomerId(customerId: string): Observable<any> {
-    return this.http.get<any>(
+  getAllTransactionsByCustomerId(customerId: string): Observable<any[]> {
+    return this.http.get<any[]>(
       `${this.baseUrl}/transactions/user/${customerId}`
     );
   }
