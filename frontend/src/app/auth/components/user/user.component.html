@@ -3,18 +3,33 @@
     <div class="mb-3 mt-3">
         <label for="username" class="form-label"><b>Username:</b></label>
         <input type="text" name="username" id="username" formControlName="username" class="form-control">
+        <div *ngIf="userForm.get('username')?.touched" class="container">
+            <small *ngIf="userForm.get('username')?.errors?.['required']" class="text-danger">Username is required.</small>
+            <small *ngIf="userForm.get('username')?.errors?.['specialCharacters']" class="text-danger">Username cannot have special characters.</small>
+        </div>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label"><b>Password:</b></label>
         <input type="password" name="password" id="password" formControlName="password" class="form-control">
+        <div *ngIf="userForm.get('password')?.touched" class="container">
+            <small *ngIf="userForm.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+            <small *ngIf="userForm.get('password')?.errors?.['minLength']" class="text-danger">Password must have atleast 8 characters.</small>
+        </div>
     </div>
     <div class="mb-3">
         <label for="name" class="form-label"><b>Full Name:</b></label>
         <input type="text" name="name" id="name" formControlName="name" class="form-control">
+        <div *ngIf="userForm.get('name')?.touched" class="container">
+            <small *ngIf="userForm.get('name')?.errors?.['required']" class="text-danger">Name is required.</small>
+        </div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label"><b>Email:</b></label>
         <input type="email" name="email" id="email" formControlName="email" class="form-control">
+        <div *ngIf="userForm.get('email')?.touched" class="container">
+            <small *ngIf="userForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+            <small *ngIf="userForm.get('email')?.errors?.['email']" class="text-danger">Email must follow email format. (eg. example@example.com)</small>
+        </div>
     </div>
     <div class="mb-3">
         <label for="role" class="form-label"><b>Role:</b></label>
@@ -22,10 +37,13 @@
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
+        <div *ngIf="userForm.get('role')?.touched" class="container">
+            <small *ngIf="userForm.get('role')?.errors?.['required']" class="text-danger">Role is required.</small>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary mb-3">Create User</button>
     <a [routerLink]="['/auth/login']" class="mb-3 text-center nav-link text-primary"><b>Login</b></a>
 </form>
-<div *ngIf="errorMessage" class="container-sm card bg-danger-subtle">
+<div *ngIf="errorMessage" class="container-sm card bg-danger-subtle w-50">
     <p class="text-center text-danger fw-bold p-3">{{errorMessage}}</p>
 </div>

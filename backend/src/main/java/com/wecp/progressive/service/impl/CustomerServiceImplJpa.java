@@ -40,7 +40,7 @@ public class CustomerServiceImplJpa implements CustomerService {
         // if (customers.getRole()==null) {
         //     throw new CustomerAlreadyExistsException("Role cannot be NULL");
         // }
-        if (customerRepository.findByEmail(customers.getEmail())==null) {
+        if (customerRepository.findByEmail(customers.getEmail())==null && customerRepository.findByUsername(customers.getUsername())==null) {
             customers.setPassword(passwordEncoder.encode(customers.getPassword()));
             return customerRepository.save(customers).getCustomerId();
         }

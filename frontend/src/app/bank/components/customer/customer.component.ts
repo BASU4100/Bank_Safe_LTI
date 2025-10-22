@@ -53,8 +53,8 @@ export class CustomersComponent implements OnInit {
             this.router.navigate(['/bank']);
           }, 1500);
         },
-        error: (error) => this.customerError = error.error
-      });
+          error: (error) => this.customerError = error.error.message
+    });
     } else {
       this.customerError = 'Please fill out all required fields correctly.';
       this.customerSuccess = '';

@@ -3,29 +3,32 @@
     <div class="mb-3">
         <label for="name" class="form-label"><b>Name:</b></label>
         <input type="text" name="name" id="name" formControlName="name" class="form-control">
-        <div *ngIf="customerForm.get('name')?.touched">
-            <small *ngIf="customerForm.get('name')?.invalid" class="text-danger">Name is required.</small>
+        <div *ngIf="customerForm.get('name')?.touched" class="container">
+            <small *ngIf="customerForm.get('name')?.errors?.['required']" class="text-danger">Name is required.</small>
         </div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label"><b>Email:</b></label>
         <input type="email" name="email" id="email" formControlName="email" class="form-control">
-        <div *ngIf="customerForm.get('email')?.touched">
-            <small *ngIf="customerForm.get('email')?.invalid" class="text-danger">Email is required.</small>
+        <div *ngIf="customerForm.get('email')?.touched" class="container">
+            <small *ngIf="customerForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</small>
+            <small *ngIf="customerForm.get('email')?.errors?.['email']" class="text-danger">Email must follow email format.(eg. example@example.com)</small>
         </div>
     </div>
     <div class="mb-3">
         <label for="username" class="form-label"><b>Username:</b></label>
         <input type="text" name="username" id="username" formControlName="username" class="form-control">
-        <div *ngIf="customerForm.get('username')?.touched">
-            <small *ngIf="customerForm.get('username')?.invalid" class="text-danger">Username is required.</small>
+        <div *ngIf="customerForm.get('username')?.touched" class="container">
+            <small *ngIf="customerForm.get('username')?.errors?.['required']" class="text-danger">Username is required.</small>
+            <small *ngIf="customerForm.get('username')?.errors?.['specialCharacters']" class="text-danger">Username must not contain speacial characters.</small>
         </div>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label"><b>Password:</b></label>
         <input type="password" name="password" id="password" formControlName="password" class="form-control">
-        <div *ngIf="customerForm.get('password')?.touched">
-            <small *ngIf="customerForm.get('password')?.invalid" class="text-danger">Password must have atleast 8 characters.</small>
+        <div *ngIf="customerForm.get('password')?.touched" class="container">
+            <small *ngIf="customerForm.get('password')?.errors?.['required']" class="text-danger">Password is required.</small>
+            <small *ngIf="customerForm.get('password')?.errors?.['minLength']" class="text-danger">Password must have atleast 8 characters.</small>
         </div>
     </div>
     <div class="mb-3">
@@ -34,11 +37,11 @@
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
         </select>
-        <div *ngIf="customerForm.get('role')?.touched">
-            <small *ngIf="customerForm.get('role')?.invalid" class="text-danger">Role is required.</small>
+        <div *ngIf="customerForm.get('role')?.touched" class="container">
+            <small *ngIf="customerForm.get('role')?.errors?.['required']" class="text-danger">Role is required.</small>
         </div>
     </div>
     <button type="submit" [disabled]="customerForm.invalid" class="btn btn-primary mb-3">Create Customer</button>
     <a [routerLink]="['/bank']" class="nav-link mb-3 text-center text-primary"><b>Dashboard</b></a>
 </form>
-<p *ngIf="isFormSubmitted" class="container card p-3 w-50 fw-50 text-center" [class]="customerSuccess ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!customerSuccess ? customerSuccess: customerError}}</p>
+<p *ngIf="isFormSubmitted" class="container card p-3 w-50 fw-50 text-center fw-bold" [class]="customerSuccess ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!customerSuccess ? customerSuccess: customerError}}</p>
