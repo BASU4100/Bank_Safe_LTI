@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h2 class="text-center mb-3">Perform a Transaction</h2>
-    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3 p-3 w-50">
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="container shadow card bg-light mb-3 p-3 w-50">
         <div class="mb-3">
             <label for="accounts" class="form-label"><b>Account:</b></label>
             <select name="accounts" id="accounts" class="form-control" formControlName="accounts">
@@ -35,5 +35,5 @@
         <button type="submit" [disabled]="transactionForm.invalid" class="mb-3 btn btn-primary">Create Transaction</button>
         <a class="text-center text-primary nav-link mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
     </form>
-    <div *ngIf="transactionError || transactionSuccess" [class]="transactionError ? 'bg-danger-subtle text-danger text-center': 'bg-success-subtle text-success text-center'" class="container card p-3 fw-bold w-50">{{transactionError ? transactionError : transactionSuccess}}</div>
+    <div *ngIf="transactionError || transactionSuccess" [class]="transactionError ? 'bg-danger-subtle text-danger text-center': 'bg-success-subtle text-success text-center'" class="container shadow card p-3 fw-bold w-50">{{transactionError ? transactionError : transactionSuccess}}</div>
 </div>

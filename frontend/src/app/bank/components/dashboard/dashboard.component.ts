@@ -24,6 +24,12 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         this.role = localStorage.getItem("role") as string;
         this.userId = localStorage.getItem("user_id") as string;
+        this.bankService.getCustomerById(Number(this.userId)).subscribe({
+            next: (response) => {
+                this.loggedInCustomer = response;
+            },
+            error: (error) => console.log('Error loading logged in customer details', error)
+        });
         if (this.role === 'ADMIN') {
             console.log('loadAdminData');
             this.loadAdminData();
@@ -58,12 +64,6 @@ export class DashboardComponent implements OnInit {
     }
 
     loadUserData(): void {
-        this.bankService.getCustomerById(Number(this.userId)).subscribe({
-            next: (response) => {
-                this.loggedInCustomer = response;
-            },
-            error: (error) => console.log('Error loading logged in customer details', error)
-        });
         this.bankService.getAccountsByUser(this.userId).subscribe({
             next: (response) => {
                 this.accounts = response;

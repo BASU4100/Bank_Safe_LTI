@@ -1,5 +1,5 @@
 <h1 class="text-center mb-3 mt-5">Register</h1>
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="container-sm card bg-light mb-3 p-3 w-50">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="container-sm shadow card bg-light mb-3 p-3 w-50">
     <div class="mb-3 mt-3">
         <label for="username" class="form-label"><b>Username:</b></label>
         <input type="text" name="username" id="username" formControlName="username" class="form-control">
@@ -44,6 +44,6 @@
     <button type="submit" class="btn btn-primary mb-3">Create User</button>
     <a [routerLink]="['/auth/login']" class="mb-3 text-center nav-link text-primary"><b>Login</b></a>
 </form>
-<div *ngIf="errorMessage" class="container-sm card bg-danger-subtle w-50">
+<div *ngIf="errorMessage" class="container-sm card bg-danger-subtle w-50 shadow">
     <p class="text-center text-danger fw-bold p-3">{{errorMessage}}</p>
 </div>

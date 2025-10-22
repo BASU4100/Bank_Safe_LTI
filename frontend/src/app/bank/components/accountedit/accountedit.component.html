@@ -1,4 +1,4 @@
-<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container card bg-light mb-3 mt-5 w-50">
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="container shadow card bg-light mb-3 mt-5 w-50">
     <h3 class="text-center m-3">Update Account</h3>
     <div class="mb-3">
         <label for="customer" class="form-label"><b>Customer:</b></label>
@@ -19,4 +19,4 @@
     <button type="submit" [disabled]="accountForm.invalid" class="btn btn-primary mb-3 form-action">Update Account</button>
     <a class="form-action nav-link text-primary text-center mb-3" [routerLink]="['/bank']"><b>Dashboard</b></a>
 </form>
-<p *ngIf="isFormSubmitted" class="container card p-3 w-50 fw-50 text-center" [class]="successMessage ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!successMessage ? successMessage: errorMessage}}</p>
+<p *ngIf="isFormSubmitted" class="container shadow card p-3 w-50 fw-50 text-center" [class]="successMessage ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'">{{!!successMessage ? successMessage: errorMessage}}</p>
