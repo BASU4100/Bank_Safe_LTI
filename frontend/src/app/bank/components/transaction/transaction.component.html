@@ -6,7 +6,7 @@
             <select name="accounts" id="accounts" class="form-control" formControlName="accounts">
                 <option *ngFor="let account of accounts" [ngValue]="account">{{account.accountId}}</option>
             </select>
-            <div *ngIf="transactionForm.get('accounts')?.touched">
+            <div *ngIf="transactionForm.get('accounts')?.touched" class="container">
                 <small *ngIf="transactionForm.get('accounts')?.invalid" class="text-danger">Account is required.</small>
             </div>
         </div>
@@ -14,7 +14,7 @@
         <div class="mb-3">
             <label for="amount" class="form-label"><b>Amount:</b></label>
             <input type="number" name="amount" id="amount" formControlName="amount" class="form-control">
-            <div *ngIf="transactionForm.get('amount')?.touched">
+            <div *ngIf="transactionForm.get('amount')?.touched" class="container">
                 <small *ngIf="transactionForm.get('amount')?.invalid" class="text-danger">Amount can not be less than 0.</small>
             </div>
         </div>
@@ -29,6 +29,9 @@
                     <input class="form-check-input" type="radio" formControlName="transactionType" id="debit" value="debit">
                     <label class="form-check-label" for="debit">Debit</label>
                 </div>
+            </div>
+            <div *ngIf="transactionForm.get('transactionType')?.touched" class="container"></div>
+                <small *ngIf="transactionForm.get('transactionType')?.invalid" class="text-danger">Transaction type is required.</small>
             </div>
         </div>
         

@@ -3,9 +3,11 @@
     <div class="mb-3">
         <label for="customer" class="form-label"><b>Customer:</b></label>
         <select name="customer" id="customer" formControlName="customer" class="form-control">
-            <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.name}}</option>
+            <ng-container *ngFor="let customer of customers">
+                <option *ngIf="customer.role === 'USER'" [ngValue]="customer">{{customer.name}}</option>
+            </ng-container>
         </select>
-        <div *ngIf="accountForm.get('customer')?.touched">
+        <div *ngIf="accountForm.get('customer')?.touched" class="container">
             <small *ngIf="accountForm.get('customer')?.invalid" class="text-danger">Customer is required.</small>
         </div>
     </div>
@@ -13,8 +15,8 @@
     <div class="mb-3">
         <label for="balance" class="form-label"><b>Balance:</b></label>
         <input type="number" name="balance" id="balance" formControlName="balance" class="form-control">
-        <div *ngIf="accountForm.get('balance')?.touched">
-            <small *ngIf="accountForm.get('balance')?.invalid" class="text-danger">Balance cannot be negative.</small>
+        <div *ngIf="accountForm.get('balance')?.touched" class="container">
+            <small *ngIf="accountForm.get('balance')?.invalid" class="text-danger">Balance cannot be negative or empty.</small>
         </div>
     </div>
 

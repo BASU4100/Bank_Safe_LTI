@@ -3,11 +3,11 @@
         <div class="navbar">
             <a [routerLink]="['/bank']" class="navbar-brand fw-bold">Dashboard</a>
             <div *ngIf="role === 'ADMIN'; else userNav" class="navbar">
-                <a [routerLink]="['/bank/customer']" class="nav-link mx-2 ">Add New Customer</a>
-                <a [routerLink]="['/bank/account']" class="nav-link">Add New Account</a>
+                <a [routerLink]="['/bank/customer']" class="nav-link mx-2">Add New Customer</a>
+                <a [routerLink]="['/bank/account']" class="nav-link mx-2">Add New Account</a>
             </div>
             <ng-template #userNav>
-                <a [routerLink]="['/bank/transaction']" class="nav-link">Add New Transaction</a>
+                <a [routerLink]="['/bank/transaction']" class="nav-link mx-2">Add New Transaction</a>
             </ng-template>
         </div>
         <button (click)="logout()" class="btn btn-danger shadow">Logout</button>
