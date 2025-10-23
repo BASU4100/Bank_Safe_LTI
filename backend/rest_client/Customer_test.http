@@ -1,14 +1,14 @@
-# POST http://localhost:5000/customers
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+POST http://localhost:5000/customers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
 
-# {
-#   "name": "Customer1",
-#   "email": "customer2@gmail.com",
-#   "username": "customer1un",
-#   "password": "customer1@pw",
-#   "role": "USER"
-# }
+{
+  "name": "Customer1",
+  "email": "customer2@gmail.com",
+  "username": "customer1un",
+  "password": "customer1@pw",
+  "role": "USER"
+}
 
 # {
 #   "name": "Customer4",
@@ -27,29 +27,29 @@
 # }
 
 ###Get all
-# GET http://localhost:5000/customers
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+GET http://localhost:5000/customers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
 
-# ###Get by id
-# GET http://localhost:5000/customers/3
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+###Get by id
+GET http://localhost:5000/customers/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
 
-# ###Update by id
+###Update by id
 
-# PUT http://localhost:5000/customers/3
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+PUT http://localhost:5000/customers/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
 
-# {
-#   "name": "Customer1updated",
-#   "email": "customer1@gmailll.com",
-#     "username": "customer1un",
-#     "password": "customer1@pw",
-#     "role": "USER"
-# }
+{
+  "name": "Customer1updated",
+  "email": "customer1@gmailll.com",
+    "username": "customer1un",
+    "password": "customer1@pw",
+    "role": "USER"
+}
 
-# ###delete by id
-# DELETE http://localhost:5000/customers/4
-# Content-Type: application/json
-# Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g
+###delete by id
+DELETE http://localhost:5000/customers/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWSVZFSzQxMDAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NjA5NzkyNjgsImV4cCI6MTc2MTA2NTY2OH0.kr7Oz6aJsZa2u4O-VDEbqYR2ksimk2fS5ig96WUP50qmm-wbExYehJ05UdIuVEqgBrrCyknpq0ISe-3_0HKn-g

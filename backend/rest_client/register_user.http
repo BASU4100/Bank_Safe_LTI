@@ -1,12 +1,7 @@
+###
 //Register user
-# POST http://localhost:5000/customer/register
-# Content-Type: application/json
-# POST https://ec2-13-232-220-12.projects.wecreateproblems.com/proxy/5000/customer/register
-//Login user
-POST http://localhost:5000/customer/login
+POST http://localhost:5000/customer/register
 Content-Type: application/json
-
-
 
 //Registeration Json
 {
@@ -34,15 +29,20 @@ Content-Type: application/json
 #     "role": "ADMIN"
 # }
 
+###
+//Login user
+POST http://localhost:5000/customer/login
+Content-Type: application/json
+
 // Login Json
 //User
 # {
 #     "username": "BASU4100",
-#     "password": "pass123"
+#     "password": "basu1234"
 # }
 
 //Admin
-{
-    "username": "VIVEK4100",
-    "password": "pass123456"
-}
+# {
+#     "username": "VIVEK4100",
+#     "password": "vivek1234"
+# }

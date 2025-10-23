@@ -22,7 +22,7 @@
                         <td>{{customer.role}}</td>
                         <td>
                             <button class="btn btn-success mx-2" [routerLink]="['/bank/customer/edit', customer.customerId ]">Edit</button>
-                            <button class="btn btn-danger" (click)="onDeleteUser(customer.customerId!)">Delete</button>
+                            <button *ngIf="loggedInCustomer.customerId !== customer.customerId" class="btn btn-danger" (click)="onDeleteUser(customer.customerId!)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
