@@ -15,7 +15,7 @@
             <label for="amount" class="form-label"><b>Amount:</b></label>
             <input type="number" name="amount" id="amount" formControlName="amount" class="form-control">
             <div *ngIf="transactionForm.get('amount')?.touched" class="container">
-                <small *ngIf="transactionForm.get('amount')?.invalid" class="text-danger">Amount can not be less than 0.</small>
+                <small *ngIf="transactionForm.get('amount')?.invalid" class="text-danger">Amount should be between 1 - 30000.</small>
             </div>
         </div>
         <div class="mb-3">
@@ -30,7 +30,7 @@
                     <label class="form-check-label" for="debit">Debit</label>
                 </div>
             </div>
-            <div *ngIf="transactionForm.get('transactionType')?.touched" class="container"></div>
+            <div *ngIf="transactionForm.get('transactionType')?.touched" class="container">
                 <small *ngIf="transactionForm.get('transactionType')?.invalid" class="text-danger">Transaction type is required.</small>
             </div>
         </div>

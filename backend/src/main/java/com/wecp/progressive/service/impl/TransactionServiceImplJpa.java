@@ -41,7 +41,7 @@ public class TransactionServiceImplJpa implements TransactionService {
         // update Accounts Logic
         Accounts account = transaction.getAccounts();
         if (transaction.getAmount()>30000) {
-            throw new WithdrawalLimitException("Withdrawal limit is 30000");
+            throw new WithdrawalLimitException("Transaction limit is 30000");
         }
         double balance = accountRepository.findByAccountId(transaction.getAccounts().getAccountId()).getBalance();
         if (transaction.getTransactionType().equalsIgnoreCase("credit")) {

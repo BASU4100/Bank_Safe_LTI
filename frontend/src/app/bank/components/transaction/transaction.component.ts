@@ -67,7 +67,7 @@ export class TransactionComponent implements OnInit {
         },
         error: (error) => {
           this.transactionSuccess = "";
-          this.transactionError = error.error;
+          this.transactionError = error.error.message;
           console.log('Error performing transactions', error)
         }
       });
