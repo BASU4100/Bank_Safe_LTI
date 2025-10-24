@@ -13,6 +13,14 @@ Content-Type: application/json
 }
 
 # {
+#     "name": "Rimi",
+#     "email": "rimi@example.com",
+#     "username": "rimi4100",
+#     "password": "rimi1234",
+#     "role": "USER"
+# }
+
+# {
 #     "name": "Vivek",
 #     "email": "example@example.com",
 #     "username": "VIVEK4100",
